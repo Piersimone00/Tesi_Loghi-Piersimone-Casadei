@@ -1,0 +1,75 @@
+body {
+    margin: 0;
+    padding: 40px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Stile generale della card */
+.logo-card {
+    position: relative;
+    background: #fcfcfc;
+    border-radius: 8px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    height: 250px;
+    box-sizing: border-box;
+    transition: transform 0.3s ease;
+}
+
+.logo-card,
+.logo-card svg {
+    overflow: visible !important;
+}
+
+.logo-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Titoli in alto a sinistra, neri e allineati */
+.logo-card h2 {
+    position: absolute;
+    top: 25px;
+    left: 30px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #000000;
+    letter-spacing: 1px;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+/* Centratura e dimensionamento uniforme dei loghi SVG */
+.logo-card svg {
+    max-width: 180px;
+    max-height: 100px;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    margin: auto;
+}
+
+/* Nasconde completamente le didascalie in basso */
+.logo-card .caption,
+.caption {
+    display: none;
+}
+
+/* Classe di evidenziazione per eventuali testi o dettagli */
+.highlight {
+    color: #004D99;
+    font-weight: bold;
+}
