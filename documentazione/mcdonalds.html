@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>McDonald's — Documentazione | Computational Brand Identity</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="documentazione.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.js"></script>
+</head>
+
+<body style="--accent: #A86A00;">
+
+    <div class="doc-shell">
+
+        <nav class="doc-topbar" aria-label="Navigazione documentazione">
+            <a class="doc-back" href="../index.html">← Torna alla griglia</a>
+            <ul class="doc-index">
+                <li><a href="apple.html">01 Apple</a></li>
+                <li><a href="coca-cola.html">02 Coca-Cola</a></li>
+                <li><a href="mcdonalds.html" aria-current="page">03 McDonald's</a></li>
+                <li><a href="nike.html">04 Nike</a></li>
+                <li><a href="amazon.html">05 Amazon</a></li>
+                <li><a href="google.html">06 Google</a></li>
+            </ul>
+        </nav>
+
+        <header class="doc-header">
+            <p class="doc-kicker">Documentazione / 03</p>
+            <h1>McDonald's</h1>
+            <p class="doc-deck">Gli archi come porta: il marchio si inclina verso il puntatore e trasforma l'identità in un segno direzionale, architettonico e reattivo.</p>
+            <ul class="doc-meta">
+                <li><strong>Tesi magistrale</strong> · Graphic design</li>
+                <li><strong>Sistema</strong> · SVG + p5.js</li>
+                <li><strong>Comportamento</strong> · Reattivo orizzontale</li>
+            </ul>
+        </header>
+
+        <main class="doc-layout">
+
+            <aside class="doc-visual" aria-label="Anteprima animata">
+                <div class="preview-card">
+                    <div class="preview-stage"><svg id="mcd-logo" overflow="visible" width="150" height="150" viewBox="-50 -50 400 300">
+                <path id="mcd-path" fill="#FFC72C" style="transform-origin: 50% 100%;"
+                    d="M195.8 17.933c23.3 0 42.2 98.3 42.2 219.7h34c0-130.7-34.3-236.5-76.3-236.5-24 0-45.2 31.7-59.2 81.5-14-49.8-35.2-81.5-59-81.5-42 0-76.2 105.7-76.2 236.4h34c0-121.4 18.7-219.6 42-219.6s42.2 90.8 42.2 202.8h33.8c0-112 19-202.8 42.3-202.8" />
+            </svg></div>
+                    <p class="preview-caption">Anteprima live · <strong>mouseX</strong></p>
+                    <p class="preview-note">Muovi il mouse orizzontalmente per inclinare gli archi.</p>
+                    <div class="brand-swatch" aria-label="Palette del brand"><span style="background: #FFC72C;"></span></div>
+                </div>
+            </aside>
+
+            <article class="doc-content">
+
+                <section class="doc-section">
+                    <h2><span>01</span> Concept</h2>
+                    <p>Gli archi di McDonald's sono uno dei segni più riconoscibili del paesaggio globale: una forma che sta tra il logo, l'insegna e l'architettura. In questo progetto vengono reinterpretati come una porta che si orienta nello spazio digitale.</p>
+                    <p>La rotazione legata al mouse introduce una dimensione direzionale: il marchio non è più un simbolo frontale e immobile, ma un elemento che segue lo sguardo e accompagna il movimento dell'utente. L'identità futura diventa così un punto di accesso, non solo un contrassegno.</p>
+                </section>
+
+                <section class="doc-section">
+                    <h2><span>02</span> Storia del marchio</h2>
+                    <p class="doc-history-title">Dalla materia architettonica al segno iconico universale</p>
+                    <h3>Nascita e origini</h3>
+                    <p>L'identità visiva di McDonald's affonda le radici nella sua architettura commerciale originaria. Nel 1952, i fratelli Richard e Maurice McDonald commissionarono all'architetto Stanley Meston la progettazione del loro nuovo ristorante a San Bernardino (California), caratterizzato da due grandi archi parabolici in lamiera gialla alti quasi otto metri che fiancheggiavano l'edificio, progettati per essere visibili a grande distanza dagli automobilisti lungo la strada. Quando Ray Kroc acquistò l'azienda nel 1961, intuì la dirompente forza visiva di quelle strutture architettoniche e le fuse in un unico segno grafico bidimensionale.</p>
+                    <h3>Evoluzione e analisi critica</h3>
+                    <p>Il primo logo unificato presentava una linea diagonale che attraversava i due archi, simulando il tetto spiovente del ristorante. Nel corso degli anni Sessanta e Settanta, sotto la direzione artistica e strategica guidata anche dall'agenzia Lippincott &amp; Margulies, il marchio subì una progressiva astrazione: la linea di mezzeria fu rimossa e i due archi (la celebre "Golden Arches" o "M" dorata) vennero svincolati dall'architettura per diventare un logo autonomo, flessibile e di forte impatto visivo.</p>
+                    <h3>La svolta contemporanea</h3>
+                    <p>Negli anni Novanta e Duemila, il marchio ha sperimentato sfumature, tridimensionalità e sfondi rossi intensi. Tuttavia, la recente transizione verso il cosiddetto design "Flat" e le linee guida coordinate dallo studio Box Clever hanno riportato il marchio alla sua essenza bidimensionale, inserendolo all'interno di un sistema visivo pulito, umano e orientato alla sostenibilità e al comfort visivo.</p>
+                </section>
+
+                <section class="doc-section">
+                    <h2><span>03</span> Analisi formale</h2>
+                    <ul>
+                        <li>Due archi simmetrici uniti da una base comune, con riempimento giallo <code>#FFC72C</code>.</li>
+                        <li>Il viewBox è <code>-50 -50 400 300</code>; la forma è compatta e monumentale, adatta a essere percepita come struttura.</li>
+                        <li>L'origine della trasformazione è impostata su <code>50% 100%</code>: la rotazione avviene alla base, come se gli archi fossero ancorati al suolo.</li>
+                        <li>La semplicità del profilo consente un'inclinazione ampia senza compromettere la leggibilità del marchio.</li>
+                    </ul>
+                </section>
+
+                <section class="doc-section">
+                    <h2><span>04</span> Sistema generativo</h2>
+                    <p>La posizione orizzontale del mouse viene mappata sull'intera larghezza della finestra e convertita in un angolo compreso tra <code>-45°</code> e <code>+45°</code>. Il valore viene limitato ai bordi della finestra, poi applicato come rotazione CSS al path.</p>
+                    <pre class="formula">angle = map(constrain(mouseX, 0, windowWidth), 0, windowWidth, -45, 45)
+mcdPath.style.transform = `rotate(${angle}deg)`</pre>
+                    <p>Il movimento è diretto, senza easing: il logo risponde istantaneamente allo spostamento del puntatore. <code>mouseX</code> è globale alla pagina, non relativo alla card, quindi l'inclinazione dipende dalla posizione del mouse nell'intera finestra.</p>
+                </section>
+
+                <section class="doc-section">
+                    <h2><span>05</span> Interazione</h2>
+                    <p>L'utente controlla l'orientamento degli archi muovendosi da sinistra a destra. Il gesto è continuo e reversibile: non c'è inerzia, né attesa. Il marchio diventa una superficie sensibile che risponde al corpo dell'utente nello spazio della griglia.</p>
+                    <p>In questo senso McDonald's introduce il tema dell'identità come orientamento: non ciò che il logo è, ma la direzione verso cui guarda.</p>
+                </section>
+
+                <section class="doc-section">
+                    <h2><span>06</span> Parametri</h2>
+                    <table class="param-table">
+                        <thead>
+                            <tr><th>Parametro</th><th>Valore</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Input</td><td><code>mouseX</code></td></tr>
+                            <tr><td>Range input</td><td><code>0 – windowWidth</code></td></tr>
+                            <tr><td>Range rotazione</td><td><code>-45° – +45°</code></td></tr>
+                            <tr><td>Easing</td><td>nessuno</td></tr>
+                            <tr><td>Origine</td><td><code>50% 100%</code></td></tr>
+                            <tr><td>Colore</td><td><code>#FFC72C</code></td></tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section class="doc-section">
+                    <h2><span>07</span> Riferimenti nel codice</h2>
+                    <p>ID SVG: <code>mcd-logo</code>, <code>mcd-path</code>. Funzione: <code>animateMcDonalds()</code> in <code>sketch.js</code>. L'origine della rotazione è dichiarata inline sull'SVG della griglia e va mantenuta anche nell'anteprima di questa pagina.</p>
+                </section>
+
+            </article>
+
+        </main>
+
+        <footer class="doc-footer">
+            <a href="coca-cola.html">← Precedente · 02 Coca-Cola</a>
+            <a href="nike.html">Prossimo · 04 Nike →</a>
+        </footer>
+
+    </div>
+
+    <script src="../sketch.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google — Documentazione | Computational Brand Identity</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="documentazione.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.js"></script>
+</head>
+
+<body style="--accent: #1A73E8;">
+
+    <div class="doc-shell">
+
+        <nav class="doc-topbar" aria-label="Navigazione documentazione">
+            <a class="doc-back" href="../index.html">← Torna alla griglia</a>
+            <ul class="doc-index">
+                <li><a href="apple.html">01 Apple</a></li>
+                <li><a href="coca-cola.html">02 Coca-Cola</a></li>
+                <li><a href="mcdonalds.html">03 McDonald's</a></li>
+                <li><a href="nike.html">04 Nike</a></li>
+                <li><a href="amazon.html">05 Amazon</a></li>
+                <li><a href="google.html" aria-current="page">06 Google</a></li>
+            </ul>
+        </nav>
+
+        <header class="doc-header">
+            <p class="doc-kicker">Documentazione / 06</p>
+            <h1>Google</h1>
+            <p class="doc-deck">L'alfabeto cromatico modulare: le lettere diventano unità indipendenti e la palette del marchio si riorganizza nel tempo.</p>
+            <ul class="doc-meta">
+                <li><strong>Tesi magistrale</strong> · Graphic design</li>
+                <li><strong>Sistema</strong> · SVG + p5.js</li>
+                <li><strong>Comportamento</strong> · Autonomo</li>
+            </ul>
+        </header>
+
+        <main class="doc-layout">
+
+            <aside class="doc-visual" aria-label="Anteprima animata">
+                <div class="preview-card">
+                    <div class="preview-stage"><svg id="google-logo" overflow="visible" width="220" height="80" viewBox="0 0 300 100">
+                <g id="google-group" transform="translate(10, 10)">
+                    <path id="g1" fill="#4285F4"
+                        d="M35.29 41.41V32H67c.31 1.64.47 3.58.47 5.68 0 7.06-1.93 15.79-8.15 22.01-6.05 6.3-13.78 9.66-24.02 9.66C16.32 69.35.36 53.89.36 34.91.36 15.93 16.32.47 35.3.47c10.5 0 17.98 4.12 23.6 9.49l-6.64 6.64c-4.03-3.78-9.49-6.72-16.97-6.72-13.86 0-24.7 11.17-24.7 25.03 0 13.86 10.84 25.03 24.7 25.03 8.99 0 14.11-3.61 17.39-6.89 2.66-2.66 4.41-6.46 5.1-11.65l-22.49.01z" />
+                    <path id="o1" fill="#EA4335"
+                        d="M115.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18C71.25 34.32 81.24 25 93.5 25s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44S80.99 39.2 80.99 47.18c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z" />
+                    <path id="o2" fill="#FBBC05"
+                        d="M163.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18c0-12.85 9.99-22.18 22.25-22.18s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44s-12.51 5.46-12.51 13.44c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z" />
+                    <path id="g2" fill="#4285F4"
+                        d="M209.75 26.34v39.82c0 16.38-9.66 23.07-21.08 23.07-10.75 0-17.22-7.19-19.66-13.07l8.48-3.53c1.51 3.61 5.21 7.87 11.17 7.87 7.31 0 11.84-4.51 11.84-13v-3.19h-.34c-2.18 2.69-6.38 5.04-11.68 5.04-11.09 0-21.25-9.66-21.25-22.09 0-12.52 10.16-22.26 21.25-22.26 5.29 0 9.49 2.35 11.68 4.96h.34v-3.61h9.25zm-8.56 20.92c0-7.81-5.21-13.52-11.84-13.52-6.72 0-12.35 5.71-12.35 13.52 0 7.73 5.63 13.36 12.35 13.36 6.63 0 11.84-5.63 11.84-13.36z" />
+                    <path id="l1" fill="#34A853" d="M225 3v65h-9.5V3h9.5z" />
+                    <path id="e1" fill="#EA4335"
+                        d="M262.02 54.48l7.56 5.04c-2.44 3.61-8.32 9.83-18.48 9.83-12.6 0-22.01-9.74-22.01-22.18 0-13.19 9.49-22.18 20.92-22.18 11.51 0 17.14 9.16 18.98 14.11l1.01 2.52-29.65 12.28c2.27 4.45 5.8 6.72 10.75 6.72 4.96 0 8.4-2.44 10.92-6.14zm-23.27-7.98l19.82-8.23c-1.09-2.77-4.37-4.7-8.23-4.7-4.95 0-11.84 4.37-11.59 12.93z" />
+                </g>
+            </svg></div>
+                    <p class="preview-caption">Anteprima live · <strong>Array Loop</strong></p>
+                    <p class="preview-note">Le lettere cambiano colore con uno sfasamento progressivo.</p>
+                    <div class="brand-swatch" aria-label="Palette del brand">
+                        <span style="background: #4285F4;"></span>
+                        <span style="background: #EA4335;"></span>
+                        <span style="background: #FBBC05;"></span>
+                        <span style="background: #34A853;"></span>
+                    </div>
+                </div>
+            </aside>
+
+            <article class="doc-content">
+
+                <section class="doc-section">
+                    <h2><span>01</span> Concept</h2>
+                    <p>Google è un marchio costruito su un'identità modulare: ogni lettera ha una forma autonoma e, insieme, compone una parola riconoscibile. I quattro colori non sono decorazione, ma un sistema di codifica che attraversa l'intero alfabeto del brand.</p>
+                    <p>Nel contesto futuro della tesi, questa modularità diventa generativa. Le lettere non conservano una posizione cromatica fissa: cambiano colore nel tempo, producendo configurazioni sempre diverse all'interno della stessa palette. L'identità resta Google, ma la sua distribuzione è temporanea.</p>
+                </section>
+
+                <section class="doc-section">
+                    <h2><span>02</span> Storia del marchio</h2>
+                    <p class="doc-history-title">Dall'empirismo tipografico alla calibrazione ottica universale</p>
+                    <h3>Nascita e origini</h3>
+                    <p>Fondata nel 1998 da Larry Page e Sergey Brin, l'identità visiva originaria di Google fu realizzata in modo artigianale da Sergey Brin utilizzando il programma di grafica GIMP. Il primissimo logo presentava il nome del motore di ricerca scritto con il carattere Baskerville Bold, caratterizzato da colori primari saturi e da un'ombra pronunciata, a cui fu persino aggiunto un punto esclamativo in omaggio a Yahoo!. Questo look rifletteva lo spirito goliardico e accademico dei laboratori di Stanford da cui il progetto aveva preso vita.</p>
+                    <h3>Evoluzione e analisi critica</h3>
+                    <p>Nel 1999 l'azienda affidò il restyling alla designer Ruth Kedar, la quale introdusse il celebre carattere tipografico Catull (un serif elegante e classico), mantenendo la sequenza cromatica ludica ma correggendo la distribuzione dei colori (con la lettera "l" colorata di verde anziché di rosso, a simboleggiare l'eccezionalità e la rottura delle regole canoniche). Nel corso dei successivi quindici anni, il logo ha subito progressive pulizie formali con l'eliminazione delle ombre e dei rilievi tridimensionali.</p>
+                    <h3>La svolta contemporanea</h3>
+                    <p>La grande rivoluzione identitaria è avvenuta nel 2015, con il passaggio al font sans-serif geometrico proprietario denominato Product Sans. Questa mossa ha trasformato Google in un sistema visivo unificato, pensato per adattarsi perfettamente a schermi di qualsiasi dimensione (dagli smartwatch agli smartphone fino ai grandi display). L'adozione di un font geometrico e modulare rende l'identità di Google la base ideale per animazioni algoritmiche, in cui i singoli glifi e i quattro colori istituzionali possono scomporsi, ricomporsi e reagire in tempo reale agli input dell'utente.</p>
+                </section>
+
+                <section class="doc-section">
+                    <h2><span>03</span> Analisi formale</h2>
+                    <ul>
+                        <li>Wordmark geometrico sans-serif composto da sei path: <code>g1</code>, <code>o1</code>, <code>o2</code>, <code>g2</code>, <code>l1</code>, <code>e1</code>.</li>
+                        <li>Il viewBox è <code>0 0 300 100</code>; il gruppo interno è traslato di <code>10,10</code>.</li>
+                        <li>La palette originale è composta da blu <code>#4285F4</code>, rosso <code>#EA4335</code>, giallo <code>#FBBC05</code> e verde <code>#34A853</code>.</li>
+                        <li>La ripetizione delle vocali e la geometria regolare rendono la parola un sistema ideale per una animazione a unità indipendenti.</li>
+                    </ul>
+                </section>
+
+                <section class="doc-section">
+                    <h2><span>04</span> Sistema generativo</h2>
+                    <p>Ogni lettera viene trattata come un'unità autonoma. Un indice cromatico viene calcolato a partire dal frame corrente e dalla posizione della lettera nella parola; il valore viene poi usato per leggere la palette e applicare un nuovo <code>fill</code>.</p>
+                    <pre class="formula">colorIndex = Math.floor((frameCount * 0.1) + (index * 1.2)) % 4
+letter.setAttribute('fill', googleColors[colorIndex])</pre>
+                    <p>Il colore cambia ogni <code>10</code> frame, cioè circa <code>0,17</code> secondi a 60 fps. Lo sfasamento di <code>1.2</code> per indice produce un'onda cromatica lungo la parola: le lettere non cambiano tutte insieme, ma in sequenza.</p>
+                </section>
+
+                <section class="doc-section">
+                    <h2><span>05</span> Interazione</h2>
+                    <p>Google è un logo autonomo: non dipende dal mouse. La sua animazione è un loop cromatico che rende visibile la natura combinatoria del marchio. L'utente non controlla il risultato, ma osserva un sistema che si riorganizza continuamente.</p>
+                    <p>Questa scelta sposta l'identità dal piano della forma a quello della regola: ciò che rende Google riconoscibile non è una combinazione fissa di colori, ma la relazione tra lettere, palette e tempo.</p>
+                </section>
+
+                <section class="doc-section">
+                    <h2><span>06</span> Parametri</h2>
+                    <table class="param-table">
+                        <thead>
+                            <tr><th>Parametro</th><th>Valore</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Input</td><td><code>frameCount</code>, <code>index</code></td></tr>
+                            <tr><td>Velocità</td><td><code>0.1</code></td></tr>
+                            <tr><td>Sfasamento</td><td><code>1.2</code> per lettera</td></tr>
+                            <tr><td>Ciclo cromatico</td><td><code>4</code> colori</td></tr>
+                            <tr><td>Aggiornamento</td><td>ogni <code>10</code> frame (≈ <code>0,17</code> s a 60 fps)</td></tr>
+                            <tr><td>Palette</td><td><code>#4285F4</code>, <code>#EA4335</code>, <code>#FBBC05</code>, <code>#34A853</code></td></tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section class="doc-section">
+                    <h2><span>07</span> Riferimenti nel codice</h2>
+                    <p>ID SVG: <code>google-logo</code>, <code>google-group</code> e le sei lettere <code>g1</code>, <code>o1</code>, <code>o2</code>, <code>g2</code>, <code>l1</code>, <code>e1</code>. Funzione: <code>animateGoogle()</code> in <code>sketch.js</code>. La palette è definita nell'array <code>googleColors</code>; le lettere vengono raccolte in <code>googleLetters</code> durante <code>setup()</code>.</p>
+                </section>
+
+            </article>
+
+        </main>
+
+        <footer class="doc-footer">
+            <a href="amazon.html">← Precedente · 05 Amazon</a>
+            <a href="apple.html">Ricomincia · 01 Apple →</a>
+        </footer>
+
+    </div>
+
+    <script src="../sketch.js"></script>
+</body>
+
+</html>

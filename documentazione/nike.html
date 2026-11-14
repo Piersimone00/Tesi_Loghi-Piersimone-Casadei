@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nike — Documentazione | Computational Brand Identity</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="documentazione.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.js"></script>
+</head>
+
+<body style="--accent: #111111;">
+
+    <div class="doc-shell">
+
+        <nav class="doc-topbar" aria-label="Navigazione documentazione">
+            <a class="doc-back" href="../index.html">← Torna alla griglia</a>
+            <ul class="doc-index">
+                <li><a href="apple.html">01 Apple</a></li>
+                <li><a href="coca-cola.html">02 Coca-Cola</a></li>
+                <li><a href="mcdonalds.html">03 McDonald's</a></li>
+                <li><a href="nike.html" aria-current="page">04 Nike</a></li>
+                <li><a href="amazon.html">05 Amazon</a></li>
+                <li><a href="google.html">06 Google</a></li>
+            </ul>
+        </nav>
+
+        <header class="doc-header">
+            <p class="doc-kicker">Documentazione / 04</p>
+            <h1>Nike</h1>
+            <p class="doc-deck">Lo swoosh come vettore: l'identità non descrive una forma, ma una velocità. Il marchio oscilla nello spazio come una traccia in movimento.</p>
+            <ul class="doc-meta">
+                <li><strong>Tesi magistrale</strong> · Graphic design</li>
+                <li><strong>Sistema</strong> · SVG + p5.js</li>
+                <li><strong>Comportamento</strong> · Autonomo</li>
+            </ul>
+        </header>
+
+        <main class="doc-layout">
+
+            <aside class="doc-visual" aria-label="Anteprima animata">
+                <div class="preview-card">
+                    <div class="preview-stage"><svg id="nike-logo" overflow="visible" width="200" height="100" viewBox="0 0 1200 800">
+                <path id="nike-path" fill="#111"
+                    d="M245.8075 717.62406c-29.79588-1.1837-54.1734-9.3368-73.23459-24.4796-3.63775-2.8928-12.30611-11.5663-15.21427-15.2245-7.72958-9.7193-12.98467-19.1785-16.48977-29.6734-10.7857-32.3061-5.23469-74.6989 15.87753-121.2243 18.0765-39.8316 45.96932-79.3366 94.63252-134.0508 7.16836-8.0511 28.51526-31.5969 28.65302-31.5969.051 0-1.11225 2.0153-2.57652 4.4694-12.65304 21.1938-23.47957 46.158-29.37751 67.7703-9.47448 34.6785-8.33163 64.4387 3.34693 87.5151 8.05611 15.898 21.86731 29.6684 37.3979 37.2806 27.18874 13.3214 66.9948 14.4235 115.60699 3.2245 3.34694-.7755 169.19363-44.801 368.55048-97.8366 199.35686-53.0408 362.49439-96.4029 362.51989-96.3672.056.046-463.16259 198.2599-703.62654 301.0914-38.08158 16.2806-48.26521 20.3928-66.16827 26.6785-45.76525 16.0714-86.76008 23.7398-119.89779 22.4235z" />
+            </svg></div>
+                    <p class="preview-caption">Anteprima live · <strong>Wave Phase</strong></p>
+                    <p class="preview-note">Il marchio oscilla verticalmente in modo continuo.</p>
+                    <div class="brand-swatch" aria-label="Palette del brand"><span style="background: #111111;"></span></div>
+                </div>
+            </aside>
+
+            <article class="doc-content">
+
+                <section class="doc-section">
+                    <h2><span>01</span> Concept</h2>
+                    <p>Nike ha trasformato un gesto grafico in un simbolo di movimento. Lo swoosh non rappresenta un oggetto, ma una traiettoria: è una forma aperta che suggerisce accelerazione, direzione e superamento del limite.</p>
+                    <p>Nel contesto futuro della tesi, questa energia viene portata nello spazio digitale attraverso un'oscillazione verticale. Il logo non è più un marchio appoggiato a una superficie, ma una presenza sospesa che vibra con un ritmo proprio. L'identità diventa cinetica.</p>
+                </section>
+
+                <section class="doc-section">
+                    <h2><span>02</span> Storia del marchio</h2>
+                    <p class="doc-history-title">Il movimento aerodinamico e l'archetipo della velocità</p>
+                    <h3>Nascita e origini</h3>
+                    <p>Fondata nel 1964 come Blue Ribbon Sports da Phil Knight e Bill Bowerman e ribattezzata Nike nel 1971, l'azienda aveva inizialmente bisogno di un'identità visiva economica e rapida da applicare sulle scarpe da corsa per una fiera imminente. Knight ingaggiò Carolyn Davidson, una studentessa di grafica della Portland State University, pagandola la modesta cifra di 35 dollari. Davidson ideò il celebre Swoosh, una forma astratta e dinamica che evocava visivamente l'ala della statua della dea greca della vittoria (Nike), oltre a suggerire movimento, flusso d'aria e velocità propulsiva.</p>
+                    <h3>Evoluzione e analisi critica</h3>
+                    <p>Inizialmente, lo Swoosh compariva accompagnato dal nome dell'azienda scritto in un carattere tipografico minuscolo e inclinato (Futura Bold). Nel corso dei decenni, il marchio ha compiuto una delle operazioni di astrazione e sintesi più riuscite nella storia del corporate branding: negli anni Settanta e Ottanta il lettering ha subito diverse variazioni, fino a quando, negli anni Novanta, la dirigenza ha deciso di rimuovere del tutto la scritta, lasciando che lo Swoosh parlasse da solo.</p>
+                    <h3>La svolta contemporanea</h3>
+                    <p>Oggi il baffo di Nike è uno dei pochissimi loghi al mondo a godere di un tale livello di riconoscimento globale da poter fare a meno di qualsiasi accompagnamento testuale. La sua forma affusolata e dinamica si presta perfettamente alla contaminazione con il design generativo e interattivo, fungendo da archetipo visivo della tensione e dell'energia cinetica.</p>
+                </section>
+
+                <section class="doc-section">
+                    <h2><span>03</span> Analisi formale</h2>
+                    <ul>
+                        <li>Un unico tracciato asimmetrico con riempimento nero <code>#111</code>.</li>
+                        <li>Il viewBox è <code>0 0 1200 800</code>: un formato ampio che lascia respirare la curva e ne esalta la tensione diagonale.</li>
+                        <li>La forma aperta e asimmetrica produce una direzione di lettura immediata, da sinistra verso destra.</li>
+                        <li>Il vuoto interno partecipa alla costruzione del segno: la curva non è piena, ma costruita per sottrazione.</li>
+                    </ul>
+                </section>
+
+                <section class="doc-section">
+                    <h2><span>04</span> Sistema generativo</h2>
+                    <p>L'animazione usa una sinusoide per generare un movimento verticale armonico. La fase cambia a ogni frame e il risultato viene applicato come traslazione CSS al path.</p>
+                    <pre class="formula">wave = sin(frameCount * 0.1) * 30
+nikePath.style.transform = `translateY(${wave}px)`</pre>
+                    <p>Il range è di <code>±30</code> pixel. Il periodo è di circa <code>62,8</code> frame, cioè <code>1,05</code> secondi a 60 fps. L'origine è il centro del path, così l'oscillazione resta bilanciata.</p>
+                </section>
+
+                <section class="doc-section">
+                    <h2><span>05</span> Interazione</h2>
+                    <p>Nike è un logo autonomo: non reagisce al mouse. La sua animazione è pensata come un respiro atletico, un ritmo interno che rende percepibile la tensione della forma anche quando l'utente non fa nulla.</p>
+                    <p>Il movimento verticale amplifica la lettura dello swoosh come vettore: la forma sembra sollevarsi e ricadere, come se stesse correndo sul posto.</p>
+                </section>
+
+                <section class="doc-section">
+                    <h2><span>06</span> Parametri</h2>
+                    <table class="param-table">
+                        <thead>
+                            <tr><th>Parametro</th><th>Valore</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Input</td><td><code>frameCount</code></td></tr>
+                            <tr><td>Ampiezza</td><td><code>30</code> px</td></tr>
+                            <tr><td>Range</td><td><code>-30 – +30</code> px</td></tr>
+                            <tr><td>Frequenza</td><td><code>0.1</code> rad/frame</td></tr>
+                            <tr><td>Periodo</td><td>≈ <code>62,8</code> frame (≈ <code>1,05</code> s a 60 fps)</td></tr>
+                            <tr><td>Origine</td><td><code>center center</code></td></tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section class="doc-section">
+                    <h2><span>07</span> Riferimenti nel codice</h2>
+                    <p>ID SVG: <code>nike-logo</code>, <code>nike-path</code>. Funzione: <code>animateNike()</code> in <code>sketch.js</code>. La trasformazione viene applicata al path, non all'intero SVG, così il movimento resta interno al riquadro della card.</p>
+                </section>
+
+            </article>
+
+        </main>
+
+        <footer class="doc-footer">
+            <a href="mcdonalds.html">← Precedente · 03 McDonald's</a>
+            <a href="amazon.html">Prossimo · 05 Amazon →</a>
+        </footer>
+
+    </div>
+
+    <script src="../sketch.js"></script>
+</body>
+
+</html>
