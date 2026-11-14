@@ -29,7 +29,7 @@
         <header class="doc-header">
             <p class="doc-kicker">Documentazione / 06</p>
             <h1>Google</h1>
-            <p class="doc-deck">L'alfabeto cromatico modulare: le lettere diventano unità indipendenti e la palette del marchio si riorganizza nel tempo.</p>
+            <p class="doc-deck">L'alfabeto cromatico modulare: le lettere si disperdono dalla linea di base mentre la palette continua a scorrere.</p>
             <ul class="doc-meta">
                 <li><strong>Tesi magistrale</strong> · Graphic design</li>
                 <li><strong>Sistema</strong> · SVG + p5.js</li>
@@ -56,8 +56,8 @@
                         d="M262.02 54.48l7.56 5.04c-2.44 3.61-8.32 9.83-18.48 9.83-12.6 0-22.01-9.74-22.01-22.18 0-13.19 9.49-22.18 20.92-22.18 11.51 0 17.14 9.16 18.98 14.11l1.01 2.52-29.65 12.28c2.27 4.45 5.8 6.72 10.75 6.72 4.96 0 8.4-2.44 10.92-6.14zm-23.27-7.98l19.82-8.23c-1.09-2.77-4.37-4.7-8.23-4.7-4.95 0-11.84 4.37-11.59 12.93z" />
                 </g>
             </svg></div>
-                    <p class="preview-caption">Anteprima live · <strong>Array Loop</strong></p>
-                    <p class="preview-note">Le lettere cambiano colore con uno sfasamento progressivo.</p>
+                    <p class="preview-caption">Anteprima live · <strong>6 lettere</strong></p>
+                    <p class="preview-note">Passa il puntatore sulla card per disperdere e ricomporre le lettere.</p>
                     <div class="brand-swatch" aria-label="Palette del brand">
                         <span style="background: #4285F4;"></span>
                         <span style="background: #EA4335;"></span>
@@ -72,7 +72,7 @@
                 <section class="doc-section">
                     <h2><span>01</span> Concept</h2>
                     <p>Google è un marchio costruito su un'identità modulare: ogni lettera ha una forma autonoma e, insieme, compone una parola riconoscibile. I quattro colori non sono decorazione, ma un sistema di codifica che attraversa l'intero alfabeto del brand.</p>
-                    <p>Nel contesto futuro della tesi, questa modularità diventa generativa. Le lettere non conservano una posizione cromatica fissa: cambiano colore nel tempo, producendo configurazioni sempre diverse all'interno della stessa palette. L'identità resta Google, ma la sua distribuzione è temporanea.</p>
+                    <p>Nel contesto futuro della tesi, questa modularità diventa generativa. Le lettere si separano dalla linea di base, ruotano e si ricompongono, mentre il colore continua a scorrere nella palette. L'identità resta Google, ma la sua distribuzione è temporanea.</p>
                 </section>
 
                 <section class="doc-section">
@@ -92,22 +92,24 @@
                         <li>Wordmark geometrico sans-serif composto da sei path: <code>g1</code>, <code>o1</code>, <code>o2</code>, <code>g2</code>, <code>l1</code>, <code>e1</code>.</li>
                         <li>Il viewBox è <code>0 0 300 100</code>; il gruppo interno è traslato di <code>10,10</code>.</li>
                         <li>La palette originale è composta da blu <code>#4285F4</code>, rosso <code>#EA4335</code>, giallo <code>#FBBC05</code> e verde <code>#34A853</code>.</li>
-                        <li>La ripetizione delle vocali e la geometria regolare rendono la parola un sistema ideale per una animazione a unità indipendenti.</li>
+                        <li>La ripetizione delle vocali e la geometria regolare rendono la parola un sistema ideale per una scomposizione a unità indipendenti.</li>
                     </ul>
                 </section>
 
                 <section class="doc-section">
                     <h2><span>04</span> Sistema generativo</h2>
-                    <p>Ogni lettera viene trattata come un'unità autonoma. Un indice cromatico viene calcolato a partire dal frame corrente e dalla posizione della lettera nella parola; il valore viene poi usato per leggere la palette e applicare un nuovo <code>fill</code>.</p>
-                    <pre class="formula">colorIndex = Math.floor((frameCount * 0.1) + (index * 1.2)) % 4
-letter.setAttribute('fill', googleColors[colorIndex])</pre>
-                    <p>Il colore cambia ogni <code>10</code> frame, cioè circa <code>0,17</code> secondi a 60 fps. Lo sfasamento di <code>1.2</code> per indice produce un'onda cromatica lungo la parola: le lettere non cambiano tutte insieme, ma in sequenza.</p>
+                    <p>Le sei lettere sono già path indipendenti. L'attivazione le fa uscire dalla linea di base con uno sfasamento alternato e una rotazione proporzionale alla loro posizione. Il colore continua a scorrere ogni dieci frame, così la scomposizione è anche cromatica.</p>
+                    <pre class="formula">a = lerp(a, hover ? 1 : 0, 0.08)
+dx = (i - 2.5) * 7 * a
+dy = (i % 2 === 0 ? -1 : 1) * 16 * a + sin(frameCount * 0.07 + i) * 3 * a
+rot = (i - 2.5) * 4 * a</pre>
+                    <p>La rotazione massima è di <code>±10°</code>. La palette resta quella originale e viene riapplicata a ogni frame: le lettere si separano, ma il sistema cromatico continua a funzionare come codice condiviso.</p>
                 </section>
 
                 <section class="doc-section">
                     <h2><span>05</span> Interazione</h2>
-                    <p>Google è un logo autonomo: non dipende dal mouse. La sua animazione è un loop cromatico che rende visibile la natura combinatoria del marchio. L'utente non controlla il risultato, ma osserva un sistema che si riorganizza continuamente.</p>
-                    <p>Questa scelta sposta l'identità dal piano della forma a quello della regola: ciò che rende Google riconoscibile non è una combinazione fissa di colori, ma la relazione tra lettere, palette e tempo.</p>
+                    <p>Il puntatore disperde l'alfabeto e lo ricompone: le lettere escono dalla linea di base, ruotano e rientrano quando il puntatore esce. Il colore non si ferma mai, nemmeno durante la scomposizione.</p>
+                    <p>L'identità resta riconoscibile perché la regola cromatica e la sequenza dei glifi non vengono meno. Google diventa un sistema che può essere temporaneamente disordinato senza perdere la propria grammatica.</p>
                 </section>
 
                 <section class="doc-section">
@@ -117,11 +119,12 @@ letter.setAttribute('fill', googleColors[colorIndex])</pre>
                             <tr><th>Parametro</th><th>Valore</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td>Input</td><td><code>frameCount</code>, <code>index</code></td></tr>
-                            <tr><td>Velocità</td><td><code>0.1</code></td></tr>
-                            <tr><td>Sfasamento</td><td><code>1.2</code> per lettera</td></tr>
-                            <tr><td>Ciclo cromatico</td><td><code>4</code> colori</td></tr>
-                            <tr><td>Aggiornamento</td><td>ogni <code>10</code> frame (≈ <code>0,17</code> s a 60 fps)</td></tr>
+                            <tr><td>Input</td><td><code>pointerenter</code>, <code>pointerleave</code>, <code>frameCount</code></td></tr>
+                            <tr><td>Parti</td><td><code>6</code> lettere</td></tr>
+                            <tr><td>Ampiezza orizzontale</td><td><code>7</code> unità SVG per lettera</td></tr>
+                            <tr><td>Ampiezza verticale</td><td><code>±16</code> unità SVG</td></tr>
+                            <tr><td>Rotazione</td><td><code>±10°</code></td></tr>
+                            <tr><td>Aggiornamento colore</td><td>ogni <code>10</code> frame (≈ <code>0,17</code> s a 60 fps)</td></tr>
                             <tr><td>Palette</td><td><code>#4285F4</code>, <code>#EA4335</code>, <code>#FBBC05</code>, <code>#34A853</code></td></tr>
                         </tbody>
                     </table>
@@ -129,7 +132,7 @@ letter.setAttribute('fill', googleColors[colorIndex])</pre>
 
                 <section class="doc-section">
                     <h2><span>07</span> Riferimenti nel codice</h2>
-                    <p>ID SVG: <code>google-logo</code>, <code>google-group</code> e le sei lettere <code>g1</code>, <code>o1</code>, <code>o2</code>, <code>g2</code>, <code>l1</code>, <code>e1</code>. Funzione: <code>animateGoogle()</code> in <code>sketch.js</code>. La palette è definita nell'array <code>googleColors</code>; le lettere vengono raccolte in <code>googleLetters</code> durante <code>setup()</code>.</p>
+                    <p>ID SVG: <code>google-logo</code>, <code>google-group</code> e le sei lettere <code>g1</code>, <code>o1</code>, <code>o2</code>, <code>g2</code>, <code>l1</code>, <code>e1</code>. Funzione: <code>animateGoogle()</code> in <code>sketch.js</code>. La palette è definita nell'array <code>googleColors</code>; le lettere vengono raccolte in <code>googleLetters</code> durante <code>setupGoogle()</code>.</p>
                 </section>
 
             </article>

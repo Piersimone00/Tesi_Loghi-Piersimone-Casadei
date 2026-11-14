@@ -29,7 +29,7 @@
         <header class="doc-header">
             <p class="doc-kicker">Documentazione / 03</p>
             <h1>McDonald's</h1>
-            <p class="doc-deck">Gli archi come porta: il marchio si inclina verso il puntatore e trasforma l'identità in un segno direzionale, architettonico e reattivo.</p>
+            <p class="doc-deck">Gli archi come porta: il marchio si apre in due metà attorno alla base e trasforma l'identità in uno spazio attraversabile.</p>
             <ul class="doc-meta">
                 <li><strong>Tesi magistrale</strong> · Graphic design</li>
                 <li><strong>Sistema</strong> · SVG + p5.js</li>
@@ -45,8 +45,8 @@
                 <path id="mcd-path" fill="#FFC72C" style="transform-origin: 50% 100%;"
                     d="M195.8 17.933c23.3 0 42.2 98.3 42.2 219.7h34c0-130.7-34.3-236.5-76.3-236.5-24 0-45.2 31.7-59.2 81.5-14-49.8-35.2-81.5-59-81.5-42 0-76.2 105.7-76.2 236.4h34c0-121.4 18.7-219.6 42-219.6s42.2 90.8 42.2 202.8h33.8c0-112 19-202.8 42.3-202.8" />
             </svg></div>
-                    <p class="preview-caption">Anteprima live · <strong>mouseX</strong></p>
-                    <p class="preview-note">Muovi il mouse orizzontalmente per inclinare gli archi.</p>
+                    <p class="preview-caption">Anteprima live · <strong>2 metà</strong></p>
+                    <p class="preview-note">Passa il puntatore sulla card per aprire e chiudere gli archi.</p>
                     <div class="brand-swatch" aria-label="Palette del brand"><span style="background: #FFC72C;"></span></div>
                 </div>
             </aside>
@@ -55,8 +55,8 @@
 
                 <section class="doc-section">
                     <h2><span>01</span> Concept</h2>
-                    <p>Gli archi di McDonald's sono uno dei segni più riconoscibili del paesaggio globale: una forma che sta tra il logo, l'insegna e l'architettura. In questo progetto vengono reinterpretati come una porta che si orienta nello spazio digitale.</p>
-                    <p>La rotazione legata al mouse introduce una dimensione direzionale: il marchio non è più un simbolo frontale e immobile, ma un elemento che segue lo sguardo e accompagna il movimento dell'utente. L'identità futura diventa così un punto di accesso, non solo un contrassegno.</p>
+                    <p>Gli archi di McDonald's sono uno dei segni più riconoscibili del paesaggio globale: una forma che sta tra il logo, l'insegna e l'architettura. In questo progetto vengono reinterpretati come una porta che si apre nello spazio digitale.</p>
+                    <p>L'apertura legata al puntatore introduce una dimensione architettonica: il marchio non è più un simbolo frontale e immobile, ma un elemento che si separa in due ante e si ricompone. L'identità futura diventa così un punto di accesso, non solo un contrassegno.</p>
                 </section>
 
                 <section class="doc-section">
@@ -75,23 +75,25 @@
                     <ul>
                         <li>Due archi simmetrici uniti da una base comune, con riempimento giallo <code>#FFC72C</code>.</li>
                         <li>Il viewBox è <code>-50 -50 400 300</code>; la forma è compatta e monumentale, adatta a essere percepita come struttura.</li>
-                        <li>L'origine della trasformazione è impostata su <code>50% 100%</code>: la rotazione avviene alla base, come se gli archi fossero ancorati al suolo.</li>
-                        <li>La semplicità del profilo consente un'inclinazione ampia senza compromettere la leggibilità del marchio.</li>
+                        <li>L'asse centrale divide il marchio in due metà speculari, ciascuna con un proprio punto di appoggio alla base.</li>
+                        <li>La semplicità del profilo consente un'apertura ampia senza compromettere la leggibilità del marchio.</li>
                     </ul>
                 </section>
 
                 <section class="doc-section">
                     <h2><span>04</span> Sistema generativo</h2>
-                    <p>La posizione orizzontale del mouse viene mappata sull'intera larghezza della finestra e convertita in un angolo compreso tra <code>-45°</code> e <code>+45°</code>. Il valore viene limitato ai bordi della finestra, poi applicato come rotazione CSS al path.</p>
-                    <pre class="formula">angle = map(constrain(mouseX, 0, windowWidth), 0, windowWidth, -45, 45)
-mcdPath.style.transform = `rotate(${angle}deg)`</pre>
-                    <p>Il movimento è diretto, senza easing: il logo risponde istantaneamente allo spostamento del puntatore. <code>mouseX</code> è globale alla pagina, non relativo alla card, quindi l'inclinazione dipende dalla posizione del mouse nell'intera finestra.</p>
+                    <p>Il marchio viene diviso in due metà speculari lungo l'asse centrale. Ogni metà è un clone ritagliato e ruota attorno al punto di appoggio alla base. L'apertura è di <code>24°</code> per lato, con una traslazione laterale di <code>16</code> unità: gli archi si aprono come una porta e si richiudono.</p>
+                    <pre class="formula">a = lerp(a, hover ? 1 : 0, 0.07)
+angle = segno * 24 * a
+offsetX = segno * 16 * a
+transform = translate(px + offsetX, py) rotate(angle) translate(-px, -py)</pre>
+                    <p>Il perno è fissato alla base centrale, così l'apertura conserva il rapporto con il suolo e con l'architettura da cui il marchio proviene.</p>
                 </section>
 
                 <section class="doc-section">
                     <h2><span>05</span> Interazione</h2>
-                    <p>L'utente controlla l'orientamento degli archi muovendosi da sinistra a destra. Il gesto è continuo e reversibile: non c'è inerzia, né attesa. Il marchio diventa una superficie sensibile che risponde al corpo dell'utente nello spazio della griglia.</p>
-                    <p>In questo senso McDonald's introduce il tema dell'identità come orientamento: non ciò che il logo è, ma la direzione verso cui guarda.</p>
+                    <p>Il puntatore apre gli archi e l'uscita li richiude. Il gesto è binario: non c'è una posizione da inseguire, ma uno stato di apertura che viene attivato e rilasciato.</p>
+                    <p>L'identità diventa un accesso: il marchio non mostra soltanto la propria forma, ma la apre come uno spazio attraversabile.</p>
                 </section>
 
                 <section class="doc-section">
@@ -101,11 +103,12 @@ mcdPath.style.transform = `rotate(${angle}deg)`</pre>
                             <tr><th>Parametro</th><th>Valore</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td>Input</td><td><code>mouseX</code></td></tr>
-                            <tr><td>Range input</td><td><code>0 – windowWidth</code></td></tr>
-                            <tr><td>Range rotazione</td><td><code>-45° – +45°</code></td></tr>
-                            <tr><td>Easing</td><td>nessuno</td></tr>
-                            <tr><td>Origine</td><td><code>50% 100%</code></td></tr>
+                            <tr><td>Input</td><td><code>pointerenter</code>, <code>pointerleave</code></td></tr>
+                            <tr><td>Suddivisione</td><td><code>2</code> metà speculari</td></tr>
+                            <tr><td>Apertura</td><td><code>±24°</code></td></tr>
+                            <tr><td>Traslazione</td><td><code>±16</code> unità SVG</td></tr>
+                            <tr><td>Perno</td><td>base centrale</td></tr>
+                            <tr><td>Attivazione</td><td><code>lerp</code> <code>0.07</code></td></tr>
                             <tr><td>Colore</td><td><code>#FFC72C</code></td></tr>
                         </tbody>
                     </table>
@@ -113,7 +116,7 @@ mcdPath.style.transform = `rotate(${angle}deg)`</pre>
 
                 <section class="doc-section">
                     <h2><span>07</span> Riferimenti nel codice</h2>
-                    <p>ID SVG: <code>mcd-logo</code>, <code>mcd-path</code>. Funzione: <code>animateMcDonalds()</code> in <code>sketch.js</code>. L'origine della rotazione è dichiarata inline sull'SVG della griglia e va mantenuta anche nell'anteprima di questa pagina.</p>
+                    <p>ID SVG: <code>mcd-logo</code>, <code>mcd-path</code>. Funzione: <code>animateMcDonalds()</code> in <code>sketch.js</code>. In <code>setupMcDonalds()</code> il path viene spostato in <code>&lt;defs&gt;</code> e diviso in due <code>&lt;use&gt;</code> ritagliati; le due ante vengono raccolte in <code>mcdHalves</code>.</p>
                 </section>
 
             </article>

@@ -29,7 +29,7 @@
         <header class="doc-header">
             <p class="doc-kicker">Documentazione / 04</p>
             <h1>Nike</h1>
-            <p class="doc-deck">Lo swoosh come vettore: l'identità non descrive una forma, ma una velocità. Il marchio oscilla nello spazio come una traccia in movimento.</p>
+            <p class="doc-deck">Lo swoosh come vettore: il marchio si divide in sei lame che scattano lungo la diagonale e poi si ricompongono.</p>
             <ul class="doc-meta">
                 <li><strong>Tesi magistrale</strong> · Graphic design</li>
                 <li><strong>Sistema</strong> · SVG + p5.js</li>
@@ -45,8 +45,8 @@
                 <path id="nike-path" fill="#111"
                     d="M245.8075 717.62406c-29.79588-1.1837-54.1734-9.3368-73.23459-24.4796-3.63775-2.8928-12.30611-11.5663-15.21427-15.2245-7.72958-9.7193-12.98467-19.1785-16.48977-29.6734-10.7857-32.3061-5.23469-74.6989 15.87753-121.2243 18.0765-39.8316 45.96932-79.3366 94.63252-134.0508 7.16836-8.0511 28.51526-31.5969 28.65302-31.5969.051 0-1.11225 2.0153-2.57652 4.4694-12.65304 21.1938-23.47957 46.158-29.37751 67.7703-9.47448 34.6785-8.33163 64.4387 3.34693 87.5151 8.05611 15.898 21.86731 29.6684 37.3979 37.2806 27.18874 13.3214 66.9948 14.4235 115.60699 3.2245 3.34694-.7755 169.19363-44.801 368.55048-97.8366 199.35686-53.0408 362.49439-96.4029 362.51989-96.3672.056.046-463.16259 198.2599-703.62654 301.0914-38.08158 16.2806-48.26521 20.3928-66.16827 26.6785-45.76525 16.0714-86.76008 23.7398-119.89779 22.4235z" />
             </svg></div>
-                    <p class="preview-caption">Anteprima live · <strong>Wave Phase</strong></p>
-                    <p class="preview-note">Il marchio oscilla verticalmente in modo continuo.</p>
+                    <p class="preview-caption">Anteprima live · <strong>6 lame</strong></p>
+                    <p class="preview-note">Passa il puntatore sulla card per attivare la scarica.</p>
                     <div class="brand-swatch" aria-label="Palette del brand"><span style="background: #111111;"></span></div>
                 </div>
             </aside>
@@ -56,7 +56,7 @@
                 <section class="doc-section">
                     <h2><span>01</span> Concept</h2>
                     <p>Nike ha trasformato un gesto grafico in un simbolo di movimento. Lo swoosh non rappresenta un oggetto, ma una traiettoria: è una forma aperta che suggerisce accelerazione, direzione e superamento del limite.</p>
-                    <p>Nel contesto futuro della tesi, questa energia viene portata nello spazio digitale attraverso un'oscillazione verticale. Il logo non è più un marchio appoggiato a una superficie, ma una presenza sospesa che vibra con un ritmo proprio. L'identità diventa cinetica.</p>
+                    <p>Nel contesto futuro della tesi, questa energia viene portata nello spazio digitale attraverso una scomposizione cinetica. Il logo si divide in lame che si sfalsano lungo la diagonale e poi rientrano, come una scia che si ricompone. L'identità resta riconoscibile, ma diventa instabile.</p>
                 </section>
 
                 <section class="doc-section">
@@ -76,22 +76,23 @@
                         <li>Un unico tracciato asimmetrico con riempimento nero <code>#111</code>.</li>
                         <li>Il viewBox è <code>0 0 1200 800</code>: un formato ampio che lascia respirare la curva e ne esalta la tensione diagonale.</li>
                         <li>La forma aperta e asimmetrica produce una direzione di lettura immediata, da sinistra verso destra.</li>
-                        <li>Il vuoto interno partecipa alla costruzione del segno: la curva non è piena, ma costruita per sottrazione.</li>
+                        <li>Il vuoto interno partecipa alla costruzione del segno: la curva non è piena, ma costruita per sottrazione e può essere suddivisa in lame.</li>
                     </ul>
                 </section>
 
                 <section class="doc-section">
                     <h2><span>04</span> Sistema generativo</h2>
-                    <p>L'animazione usa una sinusoide per generare un movimento verticale armonico. La fase cambia a ogni frame e il risultato viene applicato come traslazione CSS al path.</p>
-                    <pre class="formula">wave = sin(frameCount * 0.1) * 30
-nikePath.style.transform = `translateY(${wave}px)`</pre>
-                    <p>Il range è di <code>±30</code> pixel. Il periodo è di circa <code>62,8</code> frame, cioè <code>1,05</code> secondi a 60 fps. L'origine è il centro del path, così l'oscillazione resta bilanciata.</p>
+                    <p>Lo swoosh viene suddiviso in sei lame verticali. Ogni lama è un clone ritagliato e trasla lungo la direzione del gesto, in alto a destra, con uno sfasamento progressivo. L'attivazione aumenta l'ampiezza e crea una scia; al rilascio le lame rientrano e ricostruiscono il segno.</p>
+                    <pre class="formula">a = lerp(a, hover ? 1 : 0, 0.08)
+dx = dir * 14 * a + sin(frameCount * 0.08 + i) * 6 * a
+dy = -dir * 5 * a + cos(frameCount * 0.06 + i) * 5 * a</pre>
+                    <p>Le lame non cambiano colore: il movimento è affidato alla geometria e alla temporanea separazione delle parti. La ricomposizione è esatta, perché ogni lama conserva il proprio ritaglio originale.</p>
                 </section>
 
                 <section class="doc-section">
                     <h2><span>05</span> Interazione</h2>
-                    <p>Nike è un logo autonomo: non reagisce al mouse. La sua animazione è pensata come un respiro atletico, un ritmo interno che rende percepibile la tensione della forma anche quando l'utente non fa nulla.</p>
-                    <p>Il movimento verticale amplifica la lettura dello swoosh come vettore: la forma sembra sollevarsi e ricadere, come se stesse correndo sul posto.</p>
+                    <p>Il marchio accelera sotto il puntatore: le lame si separano lungo la diagonale e poi rientrano quando il puntatore esce. Il gesto non controlla una posizione, ma attiva una scarica di movimento.</p>
+                    <p>Lo swoosh resta riconoscibile perché la scomposizione segue la sua stessa direzione. L'identità non descrive più soltanto una velocità: la mette in scena come instabilità controllata.</p>
                 </section>
 
                 <section class="doc-section">
@@ -101,19 +102,20 @@ nikePath.style.transform = `translateY(${wave}px)`</pre>
                             <tr><th>Parametro</th><th>Valore</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td>Input</td><td><code>frameCount</code></td></tr>
-                            <tr><td>Ampiezza</td><td><code>30</code> px</td></tr>
-                            <tr><td>Range</td><td><code>-30 – +30</code> px</td></tr>
-                            <tr><td>Frequenza</td><td><code>0.1</code> rad/frame</td></tr>
-                            <tr><td>Periodo</td><td>≈ <code>62,8</code> frame (≈ <code>1,05</code> s a 60 fps)</td></tr>
-                            <tr><td>Origine</td><td><code>center center</code></td></tr>
+                            <tr><td>Input</td><td><code>pointerenter</code>, <code>pointerleave</code></td></tr>
+                            <tr><td>Suddivisione</td><td><code>6</code> lame verticali</td></tr>
+                            <tr><td>Ampiezza orizzontale</td><td><code>14 ± 6</code> unità SVG</td></tr>
+                            <tr><td>Ampiezza verticale</td><td><code>-5 ± 5</code> unità SVG</td></tr>
+                            <tr><td>Frequenza</td><td><code>0.06 – 0.08</code> rad/frame</td></tr>
+                            <tr><td>Attivazione</td><td><code>lerp</code> <code>0.08</code></td></tr>
+                            <tr><td>Colore</td><td><code>#111111</code></td></tr>
                         </tbody>
                     </table>
                 </section>
 
                 <section class="doc-section">
                     <h2><span>07</span> Riferimenti nel codice</h2>
-                    <p>ID SVG: <code>nike-logo</code>, <code>nike-path</code>. Funzione: <code>animateNike()</code> in <code>sketch.js</code>. La trasformazione viene applicata al path, non all'intero SVG, così il movimento resta interno al riquadro della card.</p>
+                    <p>ID SVG: <code>nike-logo</code>, <code>nike-path</code>. Funzione: <code>animateNike()</code> in <code>sketch.js</code>. In <code>setupNike()</code> il path viene spostato in <code>&lt;defs&gt;</code> e sostituito da sei <code>&lt;use&gt;</code> ritagliati; le lame vengono raccolte in <code>nikeFragments</code>.</p>
                 </section>
 
             </article>

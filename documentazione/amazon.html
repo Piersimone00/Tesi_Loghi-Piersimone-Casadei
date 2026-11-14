@@ -29,7 +29,7 @@
         <header class="doc-header">
             <p class="doc-kicker">Documentazione / 05</p>
             <h1>Amazon</h1>
-            <p class="doc-deck">Il sorriso come connessione: il marchio segue il puntatore lungo l'asse verticale e si trasforma in una presenza che accompagna l'utente.</p>
+            <p class="doc-deck">Il sorriso come connessione: le lettere si aprono e la freccia scivola lungo la linea di base, come una frase che si scompone.</p>
             <ul class="doc-meta">
                 <li><strong>Tesi magistrale</strong> · Graphic design</li>
                 <li><strong>Sistema</strong> · SVG + p5.js</li>
@@ -69,8 +69,8 @@
                         style="fill:#ff9900" />
                 </g>
             </svg></div>
-                    <p class="preview-caption">Anteprima live · <strong>mouseY</strong></p>
-                    <p class="preview-note">Muovi il mouse verticalmente per far seguire il marchio.</p>
+                    <p class="preview-caption">Anteprima live · <strong>6 lettere + sorriso</strong></p>
+                    <p class="preview-note">Passa il puntatore sulla card per separare lettere e sorriso.</p>
                     <div class="brand-swatch" aria-label="Palette del brand"><span style="background: #232F3E;"></span><span style="background: #FF9900;"></span></div>
                 </div>
             </aside>
@@ -80,7 +80,7 @@
                 <section class="doc-section">
                     <h2><span>01</span> Concept</h2>
                     <p>Amazon costruisce la propria identità su un doppio movimento: il wordmark racconta il servizio, mentre la freccia arancione disegna un sorriso che collega la A alla Z. È un marchio che promette completezza e accompagnamento.</p>
-                    <p>In questo progetto il sorriso diventa un elemento di orientamento: l'intero logo segue il puntatore lungo l'asse verticale. L'identità futura non è più un'immagine da leggere, ma una presenza che si allinea allo sguardo e al corpo dell'utente.</p>
+                    <p>In questo progetto il sorriso diventa un elemento mobile: le lettere si separano lungo la linea di base e il sorriso scivola verso il basso, poi tutto si ricompone. L'identità futura non è più un'immagine da leggere, ma una frase che si apre e si chiude sotto lo sguardo dell'utente.</p>
                 </section>
 
                 <section class="doc-section">
@@ -100,22 +100,25 @@
                         <li>Wordmark in blu scuro <code>#232F3E</code> con freccia arancione <code>#FF9900</code>.</li>
                         <li>Il viewBox è <code>0 0 620 200</code>; il gruppo interno è traslato di <code>10,10</code>.</li>
                         <li>La freccia è l'unico elemento cromatico caldo e diventa il vettore affettivo del marchio.</li>
-                        <li>La forma è orizzontale e compatta: il movimento verticale aggiunge una dimensione temporale senza alterare la leggibilità del wordmark.</li>
+                        <li>La forma è orizzontale e compatta: la separazione tra lettere e sorriso aggiunge una dimensione temporale senza alterare la leggibilità del wordmark.</li>
                     </ul>
                 </section>
 
                 <section class="doc-section">
                     <h2><span>04</span> Sistema generativo</h2>
-                    <p>La posizione verticale del mouse viene mappata sull'altezza della finestra e convertita in una traslazione compresa tra <code>-35</code> e <code>+35</code> pixel. La trasformazione viene applicata all'intero SVG, non al singolo path.</p>
-                    <pre class="formula">targetY = map(constrain(mouseY, 0, windowHeight), 0, windowHeight, -35, 35)
-amazonCard.style.transform = `translateY(${targetY}px)`</pre>
-                    <p>Il movimento è diretto e continuo, senza easing. <code>mouseY</code> è globale alla pagina: il logo segue il puntatore ovunque si trovi nella finestra, non solo sopra la card.</p>
+                    <p>Il wordmark è già composto da path separati: le sei lettere e i due tratti arancioni del sorriso. L'animazione non duplica nulla e agisce direttamente sui path. Le lettere si allontanano dal centro con uno sfasamento verticale, mentre il sorriso scivola verso il basso e oscilla.</p>
+                    <pre class="formula">a = lerp(a, hover ? 1 : 0, 0.08)
+dx = (i - 2.5) * 8 * a
+dy = sin(frameCount * 0.06 + i * 0.8) * 6 * a
+smileX = sin(frameCount * 0.04) * 24 * a
+smileY = 12 * a + cos(frameCount * 0.05) * 3 * a</pre>
+                    <p>La separazione massima delle lettere è di <code>±20</code> unità SVG. Il sorriso si muove di <code>±24</code> unità in orizzontale e di circa <code>12</code> in verticale, mantenendo la propria funzione di connessione tra la A e la Z.</p>
                 </section>
 
                 <section class="doc-section">
                     <h2><span>05</span> Interazione</h2>
-                    <p>L'utente controlla il marchio muovendosi in alto e in basso. Il logo non oppone resistenza: si sposta come una presenza che accompagna il gesto, mantenendo il sorriso come punto di contatto tra parola e utente.</p>
-                    <p>Questa risposta verticale introduce un'idea di identità come servizio: il marchio non sta fermo ad aspettare, ma si adatta alla posizione di chi lo guarda.</p>
+                    <p>Il puntatore separa la parola dal sorriso: le lettere si aprono a ventaglio e la freccia scivola lungo la linea di base. Quando il puntatore esce, tutto rientra nella posizione originale.</p>
+                    <p>L'identità si comporta come una frase che si apre e si chiude: il marchio non è più un blocco unico, ma una relazione tra parola e gesto affettivo.</p>
                 </section>
 
                 <section class="doc-section">
@@ -125,11 +128,12 @@ amazonCard.style.transform = `translateY(${targetY}px)`</pre>
                             <tr><th>Parametro</th><th>Valore</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td>Input</td><td><code>mouseY</code></td></tr>
-                            <tr><td>Range input</td><td><code>0 – windowHeight</code></td></tr>
-                            <tr><td>Range traslazione</td><td><code>-35 – +35</code> px</td></tr>
-                            <tr><td>Easing</td><td>nessuno</td></tr>
-                            <tr><td>Origine</td><td><code>center center</code></td></tr>
+                            <tr><td>Input</td><td><code>pointerenter</code>, <code>pointerleave</code></td></tr>
+                            <tr><td>Parti</td><td><code>6</code> lettere + <code>2</code> tratti del sorriso</td></tr>
+                            <tr><td>Ampiezza lettere</td><td><code>±20</code> unità SVG in orizzontale</td></tr>
+                            <tr><td>Ampiezza sorriso</td><td><code>±24</code> in orizzontale, <code>12</code> in verticale</td></tr>
+                            <tr><td>Frequenza</td><td><code>0.04 – 0.06</code> rad/frame</td></tr>
+                            <tr><td>Attivazione</td><td><code>lerp</code> <code>0.08</code></td></tr>
                             <tr><td>Colori</td><td><code>#232F3E</code>, <code>#FF9900</code></td></tr>
                         </tbody>
                     </table>
@@ -137,7 +141,7 @@ amazonCard.style.transform = `translateY(${targetY}px)`</pre>
 
                 <section class="doc-section">
                     <h2><span>07</span> Riferimenti nel codice</h2>
-                    <p>ID SVG: <code>amazon-logo</code>, <code>amazon-group</code>. Funzione: <code>animateAmazon()</code> in <code>sketch.js</code>. La trasformazione è applicata all'SVG esterno, quindi anche il gruppo interno mantiene la propria traslazione originale.</p>
+                    <p>ID SVG: <code>amazon-logo</code>, <code>amazon-group</code>. Funzione: <code>animateAmazon()</code> in <code>sketch.js</code>. I path vengono raccolti in <code>amazonLetters</code> e <code>amazonSmile</code> durante <code>setupAmazon()</code>; la trasformazione è applicata ai singoli path, non all'intero SVG.</p>
                 </section>
 
             </article>
