@@ -188,7 +188,7 @@ function setupNike() {
     if (!svg) return;
 
     const bbox = nikePath.getBBox();
-    const slices = 6;
+    const slices = 12;
     const overlap = 14;
     const sliceW = bbox.width / slices;
     const group = document.createElementNS(SVG_NS, 'g');
@@ -203,14 +203,16 @@ function setupNike() {
         const wrapper = document.createElementNS(SVG_NS, 'g');
         wrapper.appendChild(use);
         group.appendChild(wrapper);
+        const t = (slices - 1 - i) / (slices - 1);
         nikeFragments.push({
             el: wrapper,
-            phase: i,
-            spread: (slices - 1 - i) * 3.2
+            spread: t * 22,
+            lift: t * 18,
+            drift: (i - slices / 2) * 0.6
         });
     }
 
-    nikePivot = { x: bbox.x + bbox.width * 0.08, y: bbox.y + bbox.height * 0.82 };
+    nikePivot = { x: bbox.x + bbox.width * 0.1, y: bbox.y + bbox.height * 0.86 };
     moveToDefs(svg, nikePath);
 }
 
@@ -393,15 +395,18 @@ function animateMcDonalds() {
 
 function animateNike() {
     if (nikeFragments.length === 0) return;
-    activation.nike = lerp(activation.nike, hoverState.nike ? 1 : 0, 0.08);
+    activation.nike = lerp(activation.nike, hoverState.nike ? 1 : 0, 0.06);
     const a = activation.nike;
 
     nikeFragments.forEach((fragment, index) => {
-        const angle = -fragment.spread * a + sin(frameCount * 0.03 + index) * 1.2 * a;
-        const lift = -index * 2.2 * a;
+        const p = constrain(a * 1.35 - index * 0.045, 0, 1);
+        const e = p * p * (3 - 2 * p);
+        const angle = -fragment.spread * e;
+        const lift = -fragment.lift * e;
+        const dx = fragment.drift * e;
         fragment.el.setAttribute(
             'transform',
-            `translate(${nikePivot.x} ${nikePivot.y}) rotate(${angle}) translate(${-nikePivot.x} ${-nikePivot.y}) translate(0 ${lift})`
+            `translate(${nikePivot.x} ${nikePivot.y}) rotate(${angle}) translate(${-nikePivot.x} ${-nikePivot.y}) translate(${dx} ${lift})`
         );
     });
 }

@@ -29,7 +29,7 @@
         <header class="doc-header">
             <p class="doc-kicker">Documentazione / 04</p>
             <h1>Nike</h1>
-            <p class="doc-deck">Lo swoosh come ala della dea Nike: al passaggio del puntatore le lame si aprono a ventaglio dalla base, evocando il battito della Nike di Samotracia.</p>
+            <p class="doc-deck">Lo swoosh come drappeggio scultoreo: al passaggio del puntatore le lame si aprono come le ali della Nike di Samotracia e si assestano in una posa stabile.</p>
             <ul class="doc-meta">
                 <li><strong>Tesi magistrale</strong> · Graphic design</li>
                 <li><strong>Sistema</strong> · SVG + p5.js</li>
@@ -45,8 +45,8 @@
                 <path id="nike-path" fill="#111"
                     d="M245.8075 717.62406c-29.79588-1.1837-54.1734-9.3368-73.23459-24.4796-3.63775-2.8928-12.30611-11.5663-15.21427-15.2245-7.72958-9.7193-12.98467-19.1785-16.48977-29.6734-10.7857-32.3061-5.23469-74.6989 15.87753-121.2243 18.0765-39.8316 45.96932-79.3366 94.63252-134.0508 7.16836-8.0511 28.51526-31.5969 28.65302-31.5969.051 0-1.11225 2.0153-2.57652 4.4694-12.65304 21.1938-23.47957 46.158-29.37751 67.7703-9.47448 34.6785-8.33163 64.4387 3.34693 87.5151 8.05611 15.898 21.86731 29.6684 37.3979 37.2806 27.18874 13.3214 66.9948 14.4235 115.60699 3.2245 3.34694-.7755 169.19363-44.801 368.55048-97.8366 199.35686-53.0408 362.49439-96.4029 362.51989-96.3672.056.046-463.16259 198.2599-703.62654 301.0914-38.08158 16.2806-48.26521 20.3928-66.16827 26.6785-45.76525 16.0714-86.76008 23.7398-119.89779 22.4235z" />
             </svg></div>
-                    <p class="preview-caption">Anteprima live · <strong>ali</strong></p>
-                    <p class="preview-note">Passa il puntatore sulla card per dispiegare le ali.</p>
+                    <p class="preview-caption">Anteprima live · <strong>drappeggio</strong></p>
+                    <p class="preview-note">Passa il puntatore sulla card: il drappeggio si apre e si assesta.</p>
                     <div class="brand-swatch" aria-label="Palette del brand"><span style="background: #111111;"></span></div>
                 </div>
             </aside>
@@ -56,7 +56,7 @@
                 <section class="doc-section">
                     <h2><span>01</span> Concept</h2>
                     <p>Lo Swoosh nasce come segno di movimento, ma la sua origine rimanda esplicitamente alle ali della dea greca della vittoria, Nike — l'immagine evocata anche dalla celebre Nike di Samotracia. Il marchio è una forma slanciata che suggerisce volo, spinta e conquista.</p>
-                    <p>Nel contesto futuro della tesi, questa origine torna in primo piano: al passaggio del puntatore lo swoosh si apre a ventaglio come un'ala dispiegata. Le lame non descrivono più solo una scia di velocità, ma il battito e l'apertura delle ali della Vittoria, mantenendo il segno riconoscibile.</p>
+                    <p>Nel contesto futuro della tesi, questa origine torna in primo piano: al passaggio del puntatore lo swoosh si apre come un drappeggio scultoreo. Le lame non descrivono più una scia o un battito meccanico, ma le pieghe del tessuto scolpito che si dispiegano e si assestano in una posa, mantenendo il segno riconoscibile.</p>
                 </section>
 
                 <section class="doc-section">
@@ -82,18 +82,18 @@
 
                 <section class="doc-section">
                     <h2><span>04</span> Sistema generativo</h2>
-                    <p>Lo swoosh viene suddiviso in sei lame verticali. Ogni lama è un clone ritagliato che, in hover, ruota attorno a un perno vicino alla base dello swoosh (<code>nikePivot</code>), aprendo il segno a ventaglio come un'ala. Le lame più esterne ricevono un'apertura maggiore e un leggero sollevamento, con una lieve oscillazione che richiama il battito.</p>
-                    <pre class="formula">a = lerp(a, hover ? 1 : 0, 0.08)
-pivot = (bbox.x + bbox.w*0.08, bbox.y + bbox.h*0.82)
-angle = -spread_i * a + sin(frameCount * 0.03 + i) * 1.2 * a
-transform: rotate(angle) attorno a pivot + translate(0, -i*2.2*a)</pre>
-                    <p>Le lame non cambiano colore: il movimento è affidato alla geometria. Al rilascio l'ala si richiude e ricompone lo swoosh originale.</p>
+                    <p>Lo swoosh viene suddiviso in dodici lame verticali. Ogni lama è un clone ritagliato che, in hover, ruota attorno a un perno vicino alla base (<code>nikePivot</code>) con un progressivo sfasamento: l'apertura parte dalla base e si propaga verso la punta, simulando le pieghe di un drappeggio scultoreo che si assesta in posa.</p>
+                    <pre class="formula">a = lerp(a, hover ? 1 : 0, 0.06)
+p_i = constrain(a * 1.35 - i * 0.045, 0, 1), e_i = smoothstep(p_i)
+angle = -spread_i * e_i
+transform: rotate(angle) attorno a pivot + translate(drift_i*e_i, -lift_i*e_i)</pre>
+                    <p>Nessun battito continuo: il movimento si esaurisce nella posa aperta (nero pieno). Al rilascio le pieghe rientrano e ricompongono lo swoosh originale.</p>
                 </section>
 
                 <section class="doc-section">
                     <h2><span>05</span> Interazione</h2>
-                    <p>Il marchio si dispiega sotto il puntatore: le lame si aprono a ventaglio dalla base, evocando le ali della Nike di Samotracia, e si richiudono quando il puntatore esce. Il gesto attiva un'apertura, non una traiettoria libera.</p>
-                    <p>Lo swoosh resta riconoscibile perché la scomposizione segue la curvatura originale del segno. L'identità non esprime più soltanto velocità, ma il momento in cui l'ala della Vittoria si apre.</p>
+                    <p>Il marchio si dispiega sotto il puntatore: le lame si aprono progressivamente dalla base verso la punta, evocando le pieghe delle ali della Nike di Samotracia, e si assestano in una posa stabile finché il cursore resta sulla card. All'uscita, il drappeggio si richiude.</p>
+                    <p>Lo swoosh resta riconoscibile perché la scomposizione segue la curvatura originale del segno. L'identità richiama la tensione scultorea del tessuto nel vento, fissata in un istante.</p>
                 </section>
 
                 <section class="doc-section">
@@ -103,21 +103,21 @@ transform: rotate(angle) attorno a pivot + translate(0, -i*2.2*a)</pre>
                             <tr><th>Parametro</th><th>Valore</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td>Input</td><td><code>pointerenter</code>, <code>pointerleave</code>, <code>frameCount</code></td></tr>
-                            <tr><td>Suddivisione</td><td><code>6</code> lame verticali</td></tr>
+                            <tr><td>Input</td><td><code>pointerenter</code>, <code>pointerleave</code></td></tr>
+                            <tr><td>Suddivisione</td><td><code>12</code> lame verticali</td></tr>
                             <tr><td>Perno</td><td><code>nikePivot</code> vicino alla base dello swoosh</td></tr>
-                            <tr><td>Apertura ala</td><td><code>spread_i</code> fino a <code>~16°</code> (lame esterne)</td></tr>
-                            <tr><td>Battito</td><td><code>±1.2°</code> · <code>sin(frameCount * 0.03 + i)</code></td></tr>
-                            <tr><td>Sollevamento</td><td><code>-i * 2.2 * a</code></td></tr>
-                            <tr><td>Attivazione</td><td><code>lerp</code> <code>0.08</code></td></tr>
-                            <tr><td>Colore</td><td><code>#111111</code></td></tr>
+                            <tr><td>Apertura drappeggio</td><td><code>spread_i</code> fino a <code>~22°</code></td></tr>
+                            <tr><td>Propagazione</td><td>sfasamento progressivo base → punta (<code>smoothstep</code>)</td></tr>
+                            <tr><td>Sollevamento/deriva</td><td><code>lift_i</code>, <code>drift_i</code> per piega scultorea</td></tr>
+                            <tr><td>Attivazione</td><td><code>lerp</code> <code>0.06</code>, posa stabile</td></tr>
+                            <tr><td>Colore</td><td><code>#111111</code> (nero pieno)</td></tr>
                         </tbody>
                     </table>
                 </section>
 
                 <section class="doc-section">
                     <h2><span>07</span> Riferimenti nel codice</h2>
-                    <p>ID SVG: <code>nike-logo</code>, <code>nike-path</code>. Funzione: <code>animateNike()</code> in <code>sketch.js</code>. In <code>setupNike()</code> il path viene spostato in <code>&lt;defs&gt;</code> e sostituito da sei <code>&lt;use&gt;</code> ritagliati; le lame vengono raccolte in <code>nikeFragments</code> con <code>spread</code> e ruotate attorno a <code>nikePivot</code>.</p>
+                    <p>ID SVG: <code>nike-logo</code>, <code>nike-path</code>. Funzione: <code>animateNike()</code> in <code>sketch.js</code>. In <code>setupNike()</code> il path viene spostato in <code>&lt;defs&gt;</code> e sostituito da dodici <code>&lt;use&gt;</code> ritagliati; le lame vengono raccolte in <code>nikeFragments</code> con <code>spread</code>, <code>lift</code>, <code>drift</code> e ruotate attorno a <code>nikePivot</code>.</p>
                 </section>
 
             </article>
