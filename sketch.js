@@ -9,10 +9,14 @@ let appleFragments = [];
 let appleCenter = { x: 0, y: 0 };
 let colaFragments = [];
 let mcdHalves = [];
-let mcdPivot = { x: 0, y: 0 };
+let mcdFries = null;
 let nikeFragments = [];
 let amazonLetters = [];
 let amazonSmile = [];
+let amazonConnector = [];
+let amazonBaseline = 0;
+let amazonMorph = 0;
+let amazonArrowTarget = 0;
 
 const hoverState = { apple: false, cola: false, mcd: false, nike: false, amazon: false, google: false };
 const activation = { apple: 0, cola: 0, mcd: 0, nike: 0, amazon: 0, google: 0 };
@@ -105,7 +109,7 @@ function setupApple() {
     const bbox = applePath.getBBox();
     const cols = 4;
     const rows = 4;
-    const overlap = 8;
+    const overlap = 12;
     const tileW = bbox.width / cols;
     const tileH = bbox.height / rows;
     const group = document.createElementNS(SVG_NS, 'g');
@@ -118,6 +122,9 @@ function setupApple() {
             const y = bbox.y + row * tileH - overlap / 2;
             const clipId = addClip(svg, x, y, tileW + overlap, tileH + overlap);
             const use = addUse('apple-body', clipId);
+            use.setAttribute('stroke', '#333');
+            use.setAttribute('stroke-width', '3');
+            use.setAttribute('stroke-linejoin', 'round');
             const wrapper = document.createElementNS(SVG_NS, 'g');
             wrapper.appendChild(use);
             group.appendChild(wrapper);
@@ -125,7 +132,8 @@ function setupApple() {
                 el: wrapper,
                 cx: bbox.x + (col + 0.5) * tileW,
                 cy: bbox.y + (row + 0.5) * tileH,
-                phase: row * cols + col
+                phase: row * cols + col,
+                fixed: row === 0
             });
         }
     }
@@ -166,29 +174,10 @@ function setupMcDonalds() {
     const svg = document.getElementById('mcd-logo');
     if (!svg) return;
 
-    const bbox = mcdPath.getBBox();
-    const midX = bbox.x + bbox.width / 2;
-    const pad = 10;
-    const group = document.createElementNS(SVG_NS, 'g');
-    group.setAttribute('id', 'mcd-halves');
-    svg.appendChild(group);
-
-    const halves = [
-        { x: bbox.x - pad, w: midX - bbox.x + pad + 2 },
-        { x: midX - 2, w: bbox.x + bbox.width - midX + pad + 2 }
-    ];
-
-    halves.forEach((half, index) => {
-        const clipId = addClip(svg, half.x, bbox.y - pad, half.w, bbox.height + pad * 2);
-        const use = addUse('mcd-path', clipId);
-        const wrapper = document.createElementNS(SVG_NS, 'g');
-        wrapper.appendChild(use);
-        group.appendChild(wrapper);
-        mcdHalves.push({ el: wrapper, sign: index === 0 ? -1 : 1 });
-    });
-
-    mcdPivot = { x: midX, y: bbox.y + bbox.height };
-    moveToDefs(svg, mcdPath);
+    mcdFries = document.getElementById('mcd-fries');
+    if (mcdFries) {
+        mcdFries.style.transformOrigin = '150px 200px';
+    }
 }
 
 function setupNike() {
@@ -230,7 +219,111 @@ function setupAmazon() {
             amazonLetters.push(path);
         } else {
             amazonSmile.push(path);
+            const connector = parseAmazonConnector(path.getAttribute('d'));
+            const points = [connector.start];
+            connector.segments.forEach((segment) => {
+                points.push(segment.c1, segment.c2, segment.end);
+            });
+            const isBand = index === 6;
+            let targets = null;
+            if (isBand) {
+                const bbox = path.getBBox();
+                amazonBaseline = bbox.y + bbox.height / 2;
+                const halfThickness = bbox.height * 0.17;
+                const top = amazonBaseline - halfThickness;
+                const bottom = amazonBaseline + halfThickness;
+                targets = [
+                    amazonBaseline,
+                    bottom, bottom, bottom,
+                    bottom, bottom, bottom,
+                    bottom, top, top,
+                    top, top, top,
+                    top, top, top,
+                    top, top, amazonBaseline
+                ];
+            }
+            amazonConnector.push({
+                el: path,
+                points,
+                straight: isBand,
+                targets,
+                flatten: isBand ? 0 : 0.42
+            });
         }
+    });
+
+    const svg = document.getElementById('amazon-logo');
+    if (svg) {
+        const card = svg.closest('.logo-card, .preview-card') || svg;
+        card.addEventListener('pointerenter', () => {
+            amazonArrowTarget = amazonArrowTarget ? 0 : 1;
+        });
+    }
+}
+
+function parseAmazonConnector(d) {
+    const tokens = d.match(/[a-zA-Z]|-?\d*\.?\d+(?:e[-+]?\d+)?/g);
+    const segments = [];
+    let start = { x: 0, y: 0 };
+    let x = 0;
+    let y = 0;
+    let index = 0;
+    let command = null;
+
+    while (index < tokens.length) {
+        if (/[a-zA-Z]/.test(tokens[index])) {
+            command = tokens[index++];
+        }
+
+        if (command === 'm' || command === 'M') {
+            const nx = parseFloat(tokens[index++]);
+            const ny = parseFloat(tokens[index++]);
+            x = command === 'm' ? x + nx : nx;
+            y = command === 'm' ? y + ny : ny;
+            start = { x, y };
+            command = null;
+        } else if (command === 'c' || command === 'C') {
+            const c1x = parseFloat(tokens[index++]);
+            const c1y = parseFloat(tokens[index++]);
+            const c2x = parseFloat(tokens[index++]);
+            const c2y = parseFloat(tokens[index++]);
+            const ex = parseFloat(tokens[index++]);
+            const ey = parseFloat(tokens[index++]);
+            const c1 = { x: command === 'c' ? x + c1x : c1x, y: command === 'c' ? y + c1y : c1y };
+            const c2 = { x: command === 'c' ? x + c2x : c2x, y: command === 'c' ? y + c2y : c2y };
+            const end = { x: command === 'c' ? x + ex : ex, y: command === 'c' ? y + ey : ey };
+            segments.push({ c1, c2, end });
+            x = end.x;
+            y = end.y;
+        } else {
+            index++;
+        }
+    }
+
+    return { start, segments };
+}
+
+function updateAmazonConnector() {
+    if (amazonConnector.length === 0) return;
+
+    amazonConnector.forEach((item) => {
+        const yValues = item.points.map((point, index) => {
+            if (item.straight) {
+                const target = item.targets[index];
+                return point.y + (target - point.y) * amazonMorph;
+            }
+            const scale = 1 - item.flatten * amazonMorph;
+            return amazonBaseline + (point.y - amazonBaseline) * scale;
+        });
+        let d = `M ${item.points[0].x.toFixed(2)} ${yValues[0].toFixed(2)}`;
+
+        for (let i = 1; i < item.points.length; i += 3) {
+            d += ` C ${item.points[i].x.toFixed(2)} ${yValues[i].toFixed(2)}`
+                + ` ${item.points[i + 1].x.toFixed(2)} ${yValues[i + 1].toFixed(2)}`
+                + ` ${item.points[i + 2].x.toFixed(2)} ${yValues[i + 2].toFixed(2)}`;
+        }
+
+        item.el.setAttribute('d', d);
     });
 }
 
@@ -252,6 +345,10 @@ function animateApple() {
     const a = activation.apple;
 
     appleFragments.forEach((fragment) => {
+        if (fragment.fixed) {
+            fragment.el.style.transform = '';
+            return;
+        }
         const dx = (fragment.cx - appleCenter.x) * 0.16 * a
             + sin(frameCount * 0.04 + fragment.phase) * 12 * a;
         const dy = (fragment.cy - appleCenter.y) * 0.16 * a
@@ -275,18 +372,19 @@ function animateCola() {
 }
 
 function animateMcDonalds() {
-    if (mcdHalves.length === 0) return;
-    activation.mcd = lerp(activation.mcd, hoverState.mcd ? 1 : 0, 0.07);
+    if (!mcdPath) return;
+    activation.mcd = lerp(activation.mcd, hoverState.mcd ? 1 : 0, 0.08);
     const a = activation.mcd;
 
-    mcdHalves.forEach((half) => {
-        const angle = half.sign * 24 * a;
-        const offsetX = half.sign * 16 * a;
-        half.el.setAttribute(
-            'transform',
-            `translate(${mcdPivot.x + offsetX} ${mcdPivot.y}) rotate(${angle}) translate(${-mcdPivot.x} ${-mcdPivot.y})`
-        );
-    });
+    mcdPath.style.opacity = String(1 - a);
+    mcdPath.style.transformOrigin = '150px 200px';
+    mcdPath.style.transform = `scale(${1 - 0.15 * a}) translateY(${10 * a}px)`;
+
+    if (mcdFries) {
+        mcdFries.style.opacity = String(a);
+        const s = 0.7 + 0.3 * a;
+        mcdFries.style.transform = `translateY(${18 * (1 - a)}px) scale(${s})`;
+    }
 }
 
 function animateNike() {
@@ -303,6 +401,8 @@ function animateNike() {
 
 function animateAmazon() {
     if (amazonLetters.length === 0 && amazonSmile.length === 0) return;
+    amazonMorph = lerp(amazonMorph, amazonArrowTarget, 0.08);
+    updateAmazonConnector();
     activation.amazon = lerp(activation.amazon, hoverState.amazon ? 1 : 0, 0.08);
     const a = activation.amazon;
     const center = (amazonLetters.length - 1) / 2;

@@ -29,7 +29,7 @@
         <header class="doc-header">
             <p class="doc-kicker">Documentazione / 03</p>
             <h1>McDonald's</h1>
-            <p class="doc-deck">Gli archi come porta: il marchio si apre in due metà attorno alla base e trasforma l'identità in uno spazio attraversabile.</p>
+            <p class="doc-deck">La M resta invariata a riposo e, in hover, lascia emergere la confezione delle patatine: il marchio si trasforma in un oggetto iconico del brand.</p>
             <ul class="doc-meta">
                 <li><strong>Tesi magistrale</strong> · Graphic design</li>
                 <li><strong>Sistema</strong> · SVG + p5.js</li>
@@ -42,11 +42,22 @@
             <aside class="doc-visual" aria-label="Anteprima animata">
                 <div class="preview-card">
                     <div class="preview-stage"><svg id="mcd-logo" overflow="visible" width="150" height="150" viewBox="-50 -50 400 300">
-                <path id="mcd-path" fill="#FFC72C" style="transform-origin: 50% 100%;"
+                <path id="mcd-path" fill="#FFC72C"
                     d="M195.8 17.933c23.3 0 42.2 98.3 42.2 219.7h34c0-130.7-34.3-236.5-76.3-236.5-24 0-45.2 31.7-59.2 81.5-14-49.8-35.2-81.5-59-81.5-42 0-76.2 105.7-76.2 236.4h34c0-121.4 18.7-219.6 42-219.6s42.2 90.8 42.2 202.8h33.8c0-112 19-202.8 42.3-202.8" />
+                <g id="mcd-fries" opacity="0" style="pointer-events:none; transform-origin:150px 200px;">
+                    <rect x="78" y="28" width="16" height="110" rx="5" fill="#FFC72C" transform="rotate(-14 86 138)" />
+                    <rect x="102" y="8" width="16" height="125" rx="5" fill="#FFDA44" transform="rotate(-7 110 133)" />
+                    <rect x="128" y="0" width="17" height="132" rx="5" fill="#FFC72C" />
+                    <rect x="154" y="10" width="16" height="122" rx="5" fill="#FFDA44" transform="rotate(6 162 132)" />
+                    <rect x="178" y="2" width="17" height="130" rx="5" fill="#FFC72C" transform="rotate(10 186 132)" />
+                    <rect x="204" y="30" width="16" height="108" rx="5" fill="#FFDA44" transform="rotate(15 212 138)" />
+                    <path d="M58 108 L242 108 L228 132 L72 132 Z" fill="#C8102E" />
+                    <path d="M72 132 L228 132 L204 248 L96 248 Z" fill="#DA291C" />
+                    <path fill="#FFC72C" transform="translate(150,198) scale(0.15) translate(-136,-119)" d="M195.8 17.933c23.3 0 42.2 98.3 42.2 219.7h34c0-130.7-34.3-236.5-76.3-236.5-24 0-45.2 31.7-59.2 81.5-14-49.8-35.2-81.5-59-81.5-42 0-76.2 105.7-76.2 236.4h34c0-121.4 18.7-219.6 42-219.6s42.2 90.8 42.2 202.8h33.8c0-112 19-202.8 42.3-202.8" />
+                </g>
             </svg></div>
-                    <p class="preview-caption">Anteprima live · <strong>2 metà</strong></p>
-                    <p class="preview-note">Passa il puntatore sulla card per aprire e chiudere gli archi.</p>
+                    <p class="preview-caption">Anteprima live · <strong>confezione patatine</strong></p>
+                    <p class="preview-note">Passa il puntatore sulla card per trasformare la M nella confezione delle patatine.</p>
                     <div class="brand-swatch" aria-label="Palette del brand"><span style="background: #FFC72C;"></span></div>
                 </div>
             </aside>
@@ -55,8 +66,8 @@
 
                 <section class="doc-section">
                     <h2><span>01</span> Concept</h2>
-                    <p>Gli archi di McDonald's sono uno dei segni più riconoscibili del paesaggio globale: una forma che sta tra il logo, l'insegna e l'architettura. In questo progetto vengono reinterpretati come una porta che si apre nello spazio digitale.</p>
-                    <p>L'apertura legata al puntatore introduce una dimensione architettonica: il marchio non è più un simbolo frontale e immobile, ma un elemento che si separa in due ante e si ricompone. L'identità futura diventa così un punto di accesso, non solo un contrassegno.</p>
+                    <p>Gli archi di McDonald's sono uno dei segni più riconoscibili del paesaggio globale: una forma che sta tra il logo, l'insegna e l'architettura. In questo progetto il segno grafico si collega direttamente a un oggetto emblematico dell'esperienza del brand.</p>
+                    <p>A riposo il marchio resta la M originale, invariata. All'hover la M si dissolve e lascia emergere la confezione delle patatine: il logo non viene solo animato, ma rivela un simbolo iconico riconducibile a McDonald's.</p>
                 </section>
 
                 <section class="doc-section">
@@ -74,26 +85,25 @@
                     <h2><span>03</span> Analisi formale</h2>
                     <ul>
                         <li>Due archi simmetrici uniti da una base comune, con riempimento giallo <code>#FFC72C</code>.</li>
-                        <li>Il viewBox è <code>-50 -50 400 300</code>; la forma è compatta e monumentale, adatta a essere percepita come struttura.</li>
-                        <li>L'asse centrale divide il marchio in due metà speculari, ciascuna con un proprio punto di appoggio alla base.</li>
-                        <li>La semplicità del profilo consente un'apertura ampia senza compromettere la leggibilità del marchio.</li>
+                        <li>Il viewBox è <code>-50 -50 400 300</code>; la M resta invariata a riposo come segno di partenza.</li>
+                        <li>In hover compare una confezione rossa con patatine gialle (<code>#DA291C</code>, <code>#C8102E</code>, <code>#FFC72C</code>, <code>#FFDA44</code>), costruita come grafica SVG dedicata.</li>
+                        <li>La transizione non deforma il logo: lo sostituisce progressivamente con un oggetto iconico del brand.</li>
                     </ul>
                 </section>
 
                 <section class="doc-section">
                     <h2><span>04</span> Sistema generativo</h2>
-                    <p>Il marchio viene diviso in due metà speculari lungo l'asse centrale. Ogni metà è un clone ritagliato e ruota attorno al punto di appoggio alla base. L'apertura è di <code>24°</code> per lato, con una traslazione laterale di <code>16</code> unità: gli archi si aprono come una porta e si richiudono.</p>
-                    <pre class="formula">a = lerp(a, hover ? 1 : 0, 0.07)
-angle = segno * 24 * a
-offsetX = segno * 16 * a
-transform = translate(px + offsetX, py) rotate(angle) translate(-px, -py)</pre>
-                    <p>Il perno è fissato alla base centrale, così l'apertura conserva il rapporto con il suolo e con l'architettura da cui il marchio proviene.</p>
+                    <p>A riposo (<code>a = 0</code>) la M originale è pienamente visibile. In hover la confezione delle patatine, presente come elemento SVG dedicato, entra in scena mentre il path del logo si dissolve: la trasformazione è un crossfade con leggero movimento di scala e traslazione.</p>
+                    <pre class="formula">a = lerp(a, hover ? 1 : 0, 0.08)
+mcd-path: opacity = 1 - a, scale = 1 - 0.15 * a, translateY = 10 * a
+mcd-fries: opacity = a, scale = 0.7 + 0.3 * a, translateY = 18 * (1 - a)</pre>
+                    <p>La confezione non è ottenuta deformando gli archi: è una sagoma vera e propria (cartoncino rosso e patatine) che sostituisce il marchio per rendere il richiamo immediatamente riconoscibile.</p>
                 </section>
 
                 <section class="doc-section">
                     <h2><span>05</span> Interazione</h2>
-                    <p>Il puntatore apre gli archi e l'uscita li richiude. Il gesto è binario: non c'è una posizione da inseguire, ma uno stato di apertura che viene attivato e rilasciato.</p>
-                    <p>L'identità diventa un accesso: il marchio non mostra soltanto la propria forma, ma la apre come uno spazio attraversabile.</p>
+                    <p>A riposo il marchio è la M classica, invariata. Il puntatore attiva la comparsa della confezione delle patatine e l'uscita ripristina il logo: il gesto è binario, non una posizione da inseguire.</p>
+                    <p>In hover il segno grafico cede il posto a un oggetto emblematico dell'esperienza McDonald's, rendendo esplicito il legame tra identità visiva e prodotto iconico.</p>
                 </section>
 
                 <section class="doc-section">
@@ -104,19 +114,18 @@ transform = translate(px + offsetX, py) rotate(angle) translate(-px, -py)</pre>
                         </thead>
                         <tbody>
                             <tr><td>Input</td><td><code>pointerenter</code>, <code>pointerleave</code></td></tr>
-                            <tr><td>Suddivisione</td><td><code>2</code> metà speculari</td></tr>
-                            <tr><td>Apertura</td><td><code>±24°</code></td></tr>
-                            <tr><td>Traslazione</td><td><code>±16</code> unità SVG</td></tr>
-                            <tr><td>Perno</td><td>base centrale</td></tr>
-                            <tr><td>Attivazione</td><td><code>lerp</code> <code>0.07</code></td></tr>
-                            <tr><td>Colore</td><td><code>#FFC72C</code></td></tr>
+                            <tr><td>Stato a riposo</td><td>M originale (<code>mcd-path</code>)</td></tr>
+                            <tr><td>Stato in hover</td><td>confezione patatine (<code>mcd-fries</code>)</td></tr>
+                            <tr><td>Transizione</td><td>crossfade + scala/traslazione</td></tr>
+                            <tr><td>Attivazione</td><td><code>lerp</code> <code>0.08</code></td></tr>
+                            <tr><td>Colori confezione</td><td><code>#DA291C</code>, <code>#C8102E</code>, <code>#FFC72C</code>, <code>#FFDA44</code></td></tr>
                         </tbody>
                     </table>
                 </section>
 
                 <section class="doc-section">
                     <h2><span>07</span> Riferimenti nel codice</h2>
-                    <p>ID SVG: <code>mcd-logo</code>, <code>mcd-path</code>. Funzione: <code>animateMcDonalds()</code> in <code>sketch.js</code>. In <code>setupMcDonalds()</code> il path viene spostato in <code>&lt;defs&gt;</code> e diviso in due <code>&lt;use&gt;</code> ritagliati; le due ante vengono raccolte in <code>mcdHalves</code>.</p>
+                    <p>ID SVG: <code>mcd-logo</code>, <code>mcd-path</code>, <code>mcd-fries</code>. Funzione: <code>animateMcDonalds()</code> in <code>sketch.js</code>. A riposo è visibile la M; in hover <code>setupMcDonalds()</code>/<code>animateMcDonalds()</code> dissolvono il path e fanno emergere il gruppo <code>mcd-fries</code> (confezione rossa e patatine) con crossfade e trasformazione.</p>
                 </section>
 
             </article>
