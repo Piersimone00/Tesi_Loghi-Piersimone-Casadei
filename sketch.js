@@ -1,5 +1,6 @@
 let applePath, colaPath, mcdPath, nikePath, amazonGroup;
 let googleLetters = [];
+let googlePrism = null;
 const googleColors = ["#4285F4", "#EA4335", "#FBBC05", "#34A853"];
 
 const SVG_NS = "http://www.w3.org/2000/svg";
@@ -337,6 +338,7 @@ function setupGoogle() {
             googleLetters.push(el);
         }
     });
+    googlePrism = document.getElementById('g-prism');
 }
 
 function animateApple() {
@@ -425,15 +427,12 @@ function animateGoogle() {
     activation.google = lerp(activation.google, hoverState.google ? 1 : 0, 0.08);
     const a = activation.google;
 
-    googleLetters.forEach((letter, index) => {
-        const dir = index - 2.5;
-        const dx = dir * 7 * a;
-        const dy = (index % 2 === 0 ? -1 : 1) * 16 * a
-            + sin(frameCount * 0.07 + index) * 3 * a;
-        const rot = dir * 4 * a;
-        letter.style.transform = `translate(${dx}px, ${dy}px) rotate(${rot}deg)`;
-
-        const colorIndex = Math.floor((frameCount * 0.1) + (index * 1.2)) % 4;
-        letter.setAttribute('fill', googleColors[colorIndex]);
+    googleLetters.forEach((letter) => {
+        letter.style.opacity = String(1 - a);
+        letter.style.transform = '';
     });
+
+    if (googlePrism) {
+        googlePrism.style.opacity = String(a);
+    }
 }

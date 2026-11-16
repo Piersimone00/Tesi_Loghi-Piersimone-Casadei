@@ -29,7 +29,7 @@
         <header class="doc-header">
             <p class="doc-kicker">Documentazione / 06</p>
             <h1>Google</h1>
-            <p class="doc-deck">L'alfabeto cromatico modulare: le lettere si disperdono dalla linea di base mentre la palette continua a scorrere.</p>
+            <p class="doc-deck">Il prisma di luce: in hover il wordmark si dissolve e i quattro colori si rifrangono in un poliedro sfaccettato inedito.</p>
             <ul class="doc-meta">
                 <li><strong>Tesi magistrale</strong> · Graphic design</li>
                 <li><strong>Sistema</strong> · SVG + p5.js</li>
@@ -54,10 +54,16 @@
                     <path id="l1" fill="#34A853" d="M225 3v65h-9.5V3h9.5z" />
                     <path id="e1" fill="#EA4335"
                         d="M262.02 54.48l7.56 5.04c-2.44 3.61-8.32 9.83-18.48 9.83-12.6 0-22.01-9.74-22.01-22.18 0-13.19 9.49-22.18 20.92-22.18 11.51 0 17.14 9.16 18.98 14.11l1.01 2.52-29.65 12.28c2.27 4.45 5.8 6.72 10.75 6.72 4.96 0 8.4-2.44 10.92-6.14zm-23.27-7.98l19.82-8.23c-1.09-2.77-4.37-4.7-8.23-4.7-4.95 0-11.84 4.37-11.59 12.93z" />
+                    <g id="g-prism" opacity="0" style="pointer-events:none;">
+                        <polygon id="gp1" fill="#4285F4" points="150,4 214,45 150,45" />
+                        <polygon id="gp2" fill="#EA4335" points="214,45 150,86 150,45" />
+                        <polygon id="gp3" fill="#FBBC05" points="150,86 86,45 150,45" />
+                        <polygon id="gp4" fill="#34A853" points="86,45 150,4 150,45" />
+                    </g>
                 </g>
             </svg></div>
-                    <p class="preview-caption">Anteprima live · <strong>6 lettere</strong></p>
-                    <p class="preview-note">Passa il puntatore sulla card per disperdere e ricomporre le lettere.</p>
+                    <p class="preview-caption">Anteprima live · <strong>Prisma di luce</strong></p>
+                    <p class="preview-note">Passa il puntatore sulla card per trasformare il wordmark nel prisma.</p>
                     <div class="brand-swatch" aria-label="Palette del brand">
                         <span style="background: #4285F4;"></span>
                         <span style="background: #EA4335;"></span>
@@ -71,8 +77,8 @@
 
                 <section class="doc-section">
                     <h2><span>01</span> Concept</h2>
-                    <p>Google è un marchio costruito su un'identità modulare: ogni lettera ha una forma autonoma e, insieme, compone una parola riconoscibile. I quattro colori non sono decorazione, ma un sistema di codifica che attraversa l'intero alfabeto del brand.</p>
-                    <p>Nel contesto futuro della tesi, questa modularità diventa generativa. Le lettere si separano dalla linea di base, ruotano e si ricompongono, mentre il colore continua a scorrere nella palette. L'identità resta Google, ma la sua distribuzione è temporanea.</p>
+                    <p>Google si presenta inizialmente nella sua forma istituzionale, pulita e riconoscibile: un'ancora visiva stabile. I quattro colori non sono decorazione, ma un sistema di codifica che attraversa l'intero ecosistema del brand.</p>
+                    <p>In hover il lettering si dissolve e lascia spazio al <strong>Prisma di Luce</strong>: una figura poliedrica minimale composta da quattro piani geometrici incastrati, ciascuno nel proprio colore. Il prisma evoca la rifrazione — il motore di ricerca come lente che scompone la complessità del mondo in informazioni chiare.</p>
                 </section>
 
                 <section class="doc-section">
@@ -89,27 +95,26 @@
                 <section class="doc-section">
                     <h2><span>03</span> Analisi formale</h2>
                     <ul>
-                        <li>Wordmark geometrico sans-serif composto da sei path: <code>g1</code>, <code>o1</code>, <code>o2</code>, <code>g2</code>, <code>l1</code>, <code>e1</code>.</li>
-                        <li>Il viewBox è <code>0 0 300 100</code>; il gruppo interno è traslato di <code>10,10</code>.</li>
-                        <li>La palette originale è composta da blu <code>#4285F4</code>, rosso <code>#EA4335</code>, giallo <code>#FBBC05</code> e verde <code>#34A853</code>.</li>
-                        <li>La ripetizione delle vocali e la geometria regolare rendono la parola un sistema ideale per una scomposizione a unità indipendenti.</li>
+                        <li>A riposo: wordmark geometrico sans-serif composto da sei path: <code>g1</code>, <code>o1</code>, <code>o2</code>, <code>g2</code>, <code>l1</code>, <code>e1</code>.</li>
+                        <li>In hover: prisma sfaccettato <code>g-prism</code> formato da quattro piani triangolari incastrati (<code>gp1</code>–<code>gp4</code>) che convergono al centro.</li>
+                        <li>Ogni piano è riempito con un colore istituzionale: blu <code>#4285F4</code>, rosso <code>#EA4335</code>, giallo <code>#FBBC05</code>, verde <code>#34A853</code>.</li>
+                        <li>La geometria minimale (rombo/prisma) evita cerchi e il glifo "G", proponendo un segno inedito ma cromaticamente riconoscibile.</li>
                     </ul>
                 </section>
 
                 <section class="doc-section">
                     <h2><span>04</span> Sistema generativo</h2>
-                    <p>Le sei lettere sono già path indipendenti. L'attivazione le fa uscire dalla linea di base con uno sfasamento alternato e una rotazione proporzionale alla loro posizione. Il colore continua a scorrere ogni dieci frame, così la scomposizione è anche cromatica.</p>
+                    <p>In hover il wordmark si dissolve mentre emerge il gruppo <code>g-prism</code>. Il prisma è statico e composto da quattro triangoli adiacenti, senza sovrapposizioni: ogni faccia colorata contribuisce a formare il segno finale, come nei simboli dell'ecosistema Google.</p>
                     <pre class="formula">a = lerp(a, hover ? 1 : 0, 0.08)
-dx = (i - 2.5) * 7 * a
-dy = (i % 2 === 0 ? -1 : 1) * 16 * a + sin(frameCount * 0.07 + i) * 3 * a
-rot = (i - 2.5) * 4 * a</pre>
-                    <p>La rotazione massima è di <code>±10°</code>. La palette resta quella originale e viene riapplicata a ogni frame: le lettere si separano, ma il sistema cromatico continua a funzionare come codice condiviso.</p>
+lettere: opacity = 1 - a
+prisma: opacity = a</pre>
+                    <p>La geometria resta fissa: blu, rosso, giallo e verde si incastrano in un unico rombo sfaccettato, riconoscibile e pulito.</p>
                 </section>
 
                 <section class="doc-section">
                     <h2><span>05</span> Interazione</h2>
-                    <p>Il puntatore disperde l'alfabeto e lo ricompone: le lettere escono dalla linea di base, ruotano e rientrano quando il puntatore esce. Il colore non si ferma mai, nemmeno durante la scomposizione.</p>
-                    <p>L'identità resta riconoscibile perché la regola cromatica e la sequenza dei glifi non vengono meno. Google diventa un sistema che può essere temporaneamente disordinato senza perdere la propria grammatica.</p>
+                    <p>A riposo è visibile il wordmark istituzionale. Entrando con il puntatore il lettering svanisce e compare il prisma; all'uscita il prisma scompare e il wordmark ritorna.</p>
+                    <p>Il gesto è binario e la forma generata è stabile: l'identità alterna stato di quiete e simbolo cromatico senza movimento interno.</p>
                 </section>
 
                 <section class="doc-section">
@@ -119,12 +124,12 @@ rot = (i - 2.5) * 4 * a</pre>
                             <tr><th>Parametro</th><th>Valore</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td>Input</td><td><code>pointerenter</code>, <code>pointerleave</code>, <code>frameCount</code></td></tr>
-                            <tr><td>Parti</td><td><code>6</code> lettere</td></tr>
-                            <tr><td>Ampiezza orizzontale</td><td><code>7</code> unità SVG per lettera</td></tr>
-                            <tr><td>Ampiezza verticale</td><td><code>±16</code> unità SVG</td></tr>
-                            <tr><td>Rotazione</td><td><code>±10°</code></td></tr>
-                            <tr><td>Aggiornamento colore</td><td>ogni <code>10</code> frame (≈ <code>0,17</code> s a 60 fps)</td></tr>
+                            <tr><td>Input</td><td><code>pointerenter</code>, <code>pointerleave</code></td></tr>
+                            <tr><td>Stato a riposo</td><td>wordmark <code>g1–e1</code></td></tr>
+                            <tr><td>Stato in hover</td><td>prisma statico <code>g-prism</code></td></tr>
+                            <tr><td>Facce</td><td><code>gp1</code> blu, <code>gp2</code> rosso, <code>gp3</code> giallo, <code>gp4</code> verde</td></tr>
+                            <tr><td>Composizione</td><td>4 triangoli adiacenti, nessuna sovrapposizione</td></tr>
+                            <tr><td>Attivazione</td><td><code>lerp</code> <code>0.08</code></td></tr>
                             <tr><td>Palette</td><td><code>#4285F4</code>, <code>#EA4335</code>, <code>#FBBC05</code>, <code>#34A853</code></td></tr>
                         </tbody>
                     </table>
@@ -132,7 +137,7 @@ rot = (i - 2.5) * 4 * a</pre>
 
                 <section class="doc-section">
                     <h2><span>07</span> Riferimenti nel codice</h2>
-                    <p>ID SVG: <code>google-logo</code>, <code>google-group</code> e le sei lettere <code>g1</code>, <code>o1</code>, <code>o2</code>, <code>g2</code>, <code>l1</code>, <code>e1</code>. Funzione: <code>animateGoogle()</code> in <code>sketch.js</code>. La palette è definita nell'array <code>googleColors</code>; le lettere vengono raccolte in <code>googleLetters</code> durante <code>setupGoogle()</code>.</p>
+                    <p>ID SVG: <code>google-logo</code>, <code>google-group</code>, lettere <code>g1</code>–<code>e1</code>, gruppo <code>g-prism</code> con facce <code>gp1</code>–<code>gp4</code>. Funzione: <code>animateGoogle()</code> in <code>sketch.js</code>; il prisma viene mostrato/nascosto con crossfade statico.</p>
                 </section>
 
             </article>
