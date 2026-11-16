@@ -12,6 +12,7 @@ let colaFragments = [];
 let mcdHalves = [];
 let mcdFries = null;
 let nikeFragments = [];
+let nikePivot = { x: 0, y: 0 };
 let amazonLetters = [];
 let amazonSmile = [];
 let amazonConnector = [];
@@ -205,10 +206,11 @@ function setupNike() {
         nikeFragments.push({
             el: wrapper,
             phase: i,
-            dir: i - (slices - 1) / 2
+            spread: (slices - 1 - i) * 3.2
         });
     }
 
+    nikePivot = { x: bbox.x + bbox.width * 0.08, y: bbox.y + bbox.height * 0.82 };
     moveToDefs(svg, nikePath);
 }
 
@@ -395,9 +397,12 @@ function animateNike() {
     const a = activation.nike;
 
     nikeFragments.forEach((fragment, index) => {
-        const dx = fragment.dir * 14 * a + sin(frameCount * 0.08 + index) * 6 * a;
-        const dy = -fragment.dir * 5 * a + cos(frameCount * 0.06 + index) * 5 * a;
-        fragment.el.style.transform = `translate(${dx}px, ${dy}px)`;
+        const angle = -fragment.spread * a + sin(frameCount * 0.03 + index) * 1.2 * a;
+        const lift = -index * 2.2 * a;
+        fragment.el.setAttribute(
+            'transform',
+            `translate(${nikePivot.x} ${nikePivot.y}) rotate(${angle}) translate(${-nikePivot.x} ${-nikePivot.y}) translate(0 ${lift})`
+        );
     });
 }
 
